@@ -1,0 +1,19 @@
+body {
+}
+
+table {
+	font-family: monospace;
+	font-size: 20px;
+	border-collapse: collapse;
+}
+
+td, tr {
+	background-color: #000000;
+	color: #FFFFFF;
+	padding: 0px;
+	margin: 0px;
+	border:0px;
+	border-collapse: collapse;
+}
+
+
