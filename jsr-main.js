@@ -15,9 +15,9 @@ function initGame() {
 	
 	levelmaker.generateLevel(20);
 	
-	levelmaker.prepareLevel();
+	domutils.prepareLevel();
 	
-	levelmaker.updateMap();
+	domutils.updateMap();
 
 }
 
