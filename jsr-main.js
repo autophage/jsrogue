@@ -13,9 +13,11 @@ function initGame() {
 		alert( stringToPrint );
 	}
 	
-	levelmaker.generateLevel(1);
+	levelmaker.generateLevel(20);
 	
 	levelmaker.prepareLevel();
+	
+	levelmaker.updateMap();
 
 }
 
