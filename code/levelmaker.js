@@ -45,16 +45,41 @@ levelmaker.makeCorridors = function (numberOfRooms, rooms) {
 
 // Takes the array of rooms and sets the DOM up to represent it
 levelmaker.bakeLevel = function () {
-	for(i=0; i<mapHeight; i++) {
+/*	for(i=0; i<mapHeight; i++) {
 		for(j = 0; j < mapWidth; j++) {
-			for(k = 0; k < numberOfRooms; k++) {
-				if((j > parseInt(rooms[k].startX)) && (j < parseInt(rooms[k].endX)) && (i > parseInt(rooms[k].startY)) && (i < parseInt(rooms[k].endY))) {
-					$('tr#' + i + ' td#' + j).text('.');
-				} else {
-					$('tr#' + i + ' td#' + j).text('#');
+			for(k = 0; k < levelmaker.numberOfRooms; k++) {
+				if((j > levelmaker.rooms[k].startX) && (j < levelmaker.rooms[k].endX) && (i > levelmaker.rooms[k].startY) && (i < levelmaker.rooms[k].endY)) {
+					$('div#mapcontainer').append('<div class="tile">.</div');
+				} else if (!((j > levelmaker.rooms[k].startX) && (j < levelmaker.rooms[k].endX) && (i > levelmaker.rooms[k].startY) && (i < levelmaker.rooms[k].endY))){
+					$('div#mapcontainer').append('<div class="tile">#</div');
 				}
 			}
 		}
+		$('div#mapcontainer').append('<br/>');
+	}
+*/
+	levelmaker.tileArray = [];
+	
+	for(currentRow = 0; currentRow < mapHeight; currentRow++) {
+		levelmaker.tileArray[currentRow] = [];
+		for (currentColumn = 0; currentColumn < mapWidth; currentColumn++) {
+			levelmaker.tileArray[currentRow][currentColumn] = '<div class="tile" id="x' + currentColumn + 'y' + currentRow + '">#</div>';
+			$('div#mapcontainer').append(levelmaker.tileArray[currentRow][currentColumn]);
+		}
+		levelmaker.tileArray[currentRow][mapWidth] = '<br/>';
+		$('div#mapcontainer').append(levelmaker.tileArray[currentRow][mapWidth]);
+	}
+	
+	var temp = {};
+	
+	for(i = 0; i < levelmaker.rooms.length; i++) {
+		for(cursorX = parseInt(levelmaker.rooms[i].startX); cursorX < parseInt(levelmaker.rooms[i].endX); cursorX++) {
+			for(cursorY = parseInt(levelmaker.rooms[i].startY); cursorY < parseInt(levelmaker.rooms.endY); cursorY++) {
+				levelmaker.tileArray[cursorX][cursorY] = '<div class="tile" id="x' + cursorX + 'y' + cursorY + '">o</div>';
+				$('div#mapcontainer div#x' + cursorX + 'y' + cursorY).html(levelmaker.tileArray[cursorX][cursorY]);
+			}
+		}
+		
 	}
 }
 
@@ -82,7 +107,5 @@ levelmaker.generateLevel = function (depth) {
 	}
 	
 	levelmaker.makeCorridors(levelmaker.numberOfRooms, levelmaker.rooms);
-	
-//	levelmaker.bakeLevel();
 
 }

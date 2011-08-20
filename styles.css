@@ -16,4 +16,6 @@ td, tr {
 	border-collapse: collapse;
 }
 
-
+div.tile {
+	display: inline-block;
+}

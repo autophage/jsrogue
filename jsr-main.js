@@ -12,9 +12,10 @@ function initGame() {
 		
 		alert( stringToPrint );
 	}
-
 	
 	levelmaker.generateLevel(1);
+	
+	levelmaker.bakeLevel();
 
 }
 
