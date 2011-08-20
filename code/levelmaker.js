@@ -43,21 +43,9 @@ levelmaker.makeCorridors = function (numberOfRooms, rooms) {
 	}
 }
 
-// Takes the array of rooms and sets the DOM up to represent it
-levelmaker.bakeLevel = function () {
-/*	for(i=0; i<mapHeight; i++) {
-		for(j = 0; j < mapWidth; j++) {
-			for(k = 0; k < levelmaker.numberOfRooms; k++) {
-				if((j > levelmaker.rooms[k].startX) && (j < levelmaker.rooms[k].endX) && (i > levelmaker.rooms[k].startY) && (i < levelmaker.rooms[k].endY)) {
-					$('div#mapcontainer').append('<div class="tile">.</div');
-				} else if (!((j > levelmaker.rooms[k].startX) && (j < levelmaker.rooms[k].endX) && (i > levelmaker.rooms[k].startY) && (i < levelmaker.rooms[k].endY))){
-					$('div#mapcontainer').append('<div class="tile">#</div');
-				}
-			}
-		}
-		$('div#mapcontainer').append('<br/>');
-	}
-*/
+// Sets up DOM full of the right divs, etc
+levelmaker.prepareLevel = function () {
+
 	levelmaker.tileArray = [];
 	
 	for(currentRow = 0; currentRow < mapHeight; currentRow++) {
@@ -69,18 +57,25 @@ levelmaker.bakeLevel = function () {
 		levelmaker.tileArray[currentRow][mapWidth] = '<br/>';
 		$('div#mapcontainer').append(levelmaker.tileArray[currentRow][mapWidth]);
 	}
-	
-	var temp = {};
-	
+
+}
+
+levelmaker.updateDOM = function(x, y, ch) {
+	levelmaker.tileArray[x][y] = '<div class="tile" id="x' + x + 'y' + y + '">' + ch + '</div>';
+	$('div#mapcontainer div#x' + x + 'y' + y).html(levelmaker.tileArray[x][y]);
+}
+
+levelmaker.updateMap = function() {
 	for(i = 0; i < levelmaker.rooms.length; i++) {
 		for(cursorX = parseInt(levelmaker.rooms[i].startX); cursorX < parseInt(levelmaker.rooms[i].endX); cursorX++) {
 			for(cursorY = parseInt(levelmaker.rooms[i].startY); cursorY < parseInt(levelmaker.rooms.endY); cursorY++) {
-				levelmaker.tileArray[cursorX][cursorY] = '<div class="tile" id="x' + cursorX + 'y' + cursorY + '">o</div>';
-				$('div#mapcontainer div#x' + cursorX + 'y' + cursorY).html(levelmaker.tileArray[cursorX][cursorY]);
+				levelmaker.updateDOM(curorX, cursorY, i)
 			}
 		}
 		
 	}
+	
+	return levelmaker.tileArray;
 }
 
 // Sprinkle random items throughout the level

@@ -15,7 +15,7 @@ function initGame() {
 	
 	levelmaker.generateLevel(1);
 	
-	levelmaker.bakeLevel();
+	levelmaker.prepareLevel();
 
 }
 
