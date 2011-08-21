@@ -15,7 +15,7 @@ function initGame() {
 	
 	var testLevel = levelmaker.generateLevel(20);
 	
-	testLevel = domutils.prepareLevel(testLevel);
+	domutils.prepareLevel(testLevel);
 
 }
 

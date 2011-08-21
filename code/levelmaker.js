@@ -37,16 +37,13 @@ levelmaker.makeSquareRoom = function () {
 // Goes through the array of rooms, and for each pair of rooms i and i+1 it creates a room (or two rooms) of width 1 to link them
 levelmaker.makeCorridors = function () {
 	for(corridorNo=0; corridorNo < (levelmaker.rooms.length - 2); corridorNo++) {
-		console.log('Creating a corridor from room ' + corridorNo + ' to room ' + (corridorNo + 1) + '.');
 		levelmaker.linkByCorridor(levelmaker.rooms[corridorNo], levelmaker.rooms[(corridorNo + 1)]);
 	}
 }
 
 // Creates a corridor between two rooms
 levelmaker.linkByCorridor = function (firstRoom, secondRoom) {
-	console.log('  ---> in linkByCorridor');
 	if(secondRoom.x < firstRoom.x && firstRoom.x < (secondRoom.x + secondRoom.width)) {
-		console.log('    ---> And we can just build a vertical link!');
 		levelmaker.corridors[levelmaker.corridors.length] = {
 			x: levelmaker.randomOverlappingValue(firstRoom.x, (firstRoom.x + firstRoom.width), secondRoom.x, (secondRoom.x + secondRoom.width)),
 			y: levelmaker.whichIsHigher(firstRoom.y, secondRoom.y),
@@ -54,7 +51,6 @@ levelmaker.linkByCorridor = function (firstRoom, secondRoom) {
 			height: Math.abs(firstRoom.y - secondRoom.y)
 		}
 	} else if(secondRoom.y < firstRoom.y && firstRoom.y < (secondRoom.y + secondRoom.height)) {
-		console.log('    ---> And we can just build a horizontal link!');
 		levelmaker.corridors[levelmaker.corridors.length] = {
 			y: levelmaker.randomOverlappingValue(firstRoom.y, (firstRoom.y + firstRoom.height), secondRoom.y, (secondRoom.y + secondRoom.height)),
 			x: levelmaker.whichIsHigher(firstRoom.x, secondRoom.x),
@@ -62,11 +58,9 @@ levelmaker.linkByCorridor = function (firstRoom, secondRoom) {
 			width: Math.abs(firstRoom.x - secondRoom.x)
 		}
 	} else {
-		console.log('    ---> And this one will get complicated, we need both a horizontal and a vertical link.');
 		var destinationPoint = {};
 		destinationPoint.x = levelmaker.randomOverlappingValue(firstRoom.x, (firstRoom.x + firstRoom.width), secondRoom.x, (secondRoom.x + secondRoom.width));
 		destinationPoint.y = levelmaker.randomOverlappingValue(firstRoom.y, (firstRoom.y + firstRoom.height), secondRoom.y, (secondRoom.y + secondRoom.height));
-		console.log('    ---> Destination point is ' + destinationPoint.x + ', ' + destinationPoint.y);
 		levelmaker.corridors[levelmaker.corridors.length] = {
 			x: destinationPoint.x,
 			y: levelmaker.whichIsHigher(firstRoom.y, secondRoom.y),
@@ -87,7 +81,6 @@ levelmaker.randomOverlappingValue = function(first, second, third, fourth) {
 	var sortedArgs = args.sort();
 	var spacer = sortedArgs[2] - sortedArgs[1];
 	var result = Math.abs(Math.floor(Math.random()*spacer));
-	console.log('  random overlapping value called!  Result: ' + result);
 	return result;
 }
 
@@ -137,18 +130,20 @@ levelmaker.generateLevel = function (depth) {
 		}
 	}
 	
-	for(i=0; i<levelmaker.rooms.length; i++) {
-		for(cursorX=0; cursorX<levelmaker.rooms[i].width; cursorX++) {
-			for(cursorY=0; cursorY<levelmaker.rooms[i].height; cursorY++) {
-				tiles[cursorX][cursorY].display = ".";
+	for(i=0; i<(levelmaker.rooms.length-1); i++) {
+		for(cursorX=levelmaker.rooms[i].x; cursorX<levelmaker.rooms[i].width; cursorX++) {
+			for(cursorY=levelmaker.rooms[i].y; cursorY<levelmaker.rooms[i].height; cursorY++) {
+				tiles[cursorX][cursorY].display = i.toString();
 			}
 		}
 	}
 	
-	for(i=0; i<levelmaker.corridors.length; i++) {
+	for(i=0; i<(levelmaker.corridors.length-1); i++) {
 		for(cursorX=0; cursorX<levelmaker.corridors[i].width; cursorX++) {
 			for(cursorY=0; cursorY<levelmaker.corridors[i].height; cursorY++) {
-				tiles[cursorX][cursorY].display = ".";
+				var xbase = cursorX + levelmaker.corridors[i].x;
+				var ybase = cursorY + levelmaker.corridors[i].y;
+				tiles[xbase][ybase].display = i.toString();
 			}
 		}
 	}

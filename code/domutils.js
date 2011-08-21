@@ -2,18 +2,13 @@ var domutils = {};
 
 // Sets up DOM full of the right divs, etc
 domutils.prepareLevel = function (tiles) {
-	
-	for(currentRow = 0; currentRow < mapHeight; currentRow++) {
-		for (currentColumn = 0; currentColumn < mapWidth; currentColumn++) {
-			tiles[currentRow][currentColumn].contents = '<div class="tile" id="x' + currentColumn + 'y' + currentRow + '">' + tiles[currentRow][currentColumn].display '</div>';
-			$('div#mapcontainer').append(tiles[currentRow][currentColumn].contents);
+	for(cursorY=0; cursorY < mapHeight; cursorY++) {
+		for(cursorX=0; cursorX < mapWidth; cursorX++) {
+			var textToAdd = '<div class="tile">' + tiles[cursorX][cursorY].display + '</div>';
+			$('div#mapcontainer').append(textToAdd);
 		}
-		levelmaker.tileArray[currentRow][mapWidth] = '<br/>';
-		$('div#mapcontainer').append(levelmaker.tileArray[currentRow][mapWidth]);
+		$('div#mapcontainer').append('<br/>');
 	}
-	
-	return tiles;
-
 }
 
 domutils.updateMap = function(tiles) {
