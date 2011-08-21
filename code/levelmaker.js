@@ -114,8 +114,6 @@ levelmaker.generateLevel = function (depth) {
 		}
 	}
 	
-	levelmaker.makeCorridors();
-	
 	var tiles = [];
 	
 	for(cursorX=0; cursorX < mapWidth; cursorX++) {
@@ -126,6 +124,8 @@ levelmaker.generateLevel = function (depth) {
 			tiles[cursorX][cursorY].type = 'rock';
 		}
 	}
+	
+	levelmaker.makeCorridors();
 	
 	for(i=0; i<(levelmaker.rooms.length-1); i++) {
 		for(cursorX=levelmaker.rooms[i].x; cursorX<levelmaker.rooms[i].width; cursorX++) {
