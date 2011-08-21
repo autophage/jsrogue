@@ -13,3 +13,11 @@ div.tile {
 	background: black;
 	color: white;
 }
+
+div.rock {
+	background: #77330C;
+}
+
+div.empty {
+	background: #EEAA30;
+}

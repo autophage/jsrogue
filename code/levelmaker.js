@@ -1,7 +1,7 @@
 var levelmaker = {};
 
 // How many rooms to generate, before corridors are added
-levelmaker.numberOfRooms = Math.floor(Math.random()* 20) + 3;
+levelmaker.numberOfRooms = Math.floor(Math.random()* 40) + 20;
 
 // Array that holds rooms, used for corridor generation before baking everything in
 levelmaker.rooms = [];
@@ -14,8 +14,8 @@ levelmaker.items = [];
 
 // Generates a room of random size and at random position, then adds it to the array of rooms
 levelmaker.makeSquareRoom = function () {
-	var roomWidth = Math.floor(Math.random()*(mapWidth - 10));
-	var roomHeight = Math.floor(Math.random()*(mapHeight - 10));
+	var roomWidth = Math.floor(Math.random()*(mapWidth - 20));
+	var roomHeight = Math.floor(Math.random()*(mapHeight - 15));
 	
 	
 	var maxLeftMargin = mapWidth - roomWidth;
@@ -29,8 +29,8 @@ levelmaker.makeSquareRoom = function () {
 	return {
 		x: x,
 		y: y,
-		width: roomWidth,
-		height: roomHeight
+		width: (roomWidth + 1),
+		height: (roomHeight + 1)
 	}
 }
 
@@ -126,24 +126,25 @@ levelmaker.generateLevel = function (depth) {
 		tiles[cursorX] = [];
 		for(cursorY=0; cursorY < mapHeight; cursorY++) {
 			tiles[cursorX][cursorY] = {};
-			tiles[cursorX][cursorY].display = "#";
+			tiles[cursorX][cursorY].display = ".";
+			tiles[cursorX][cursorY].type = 'rock';
 		}
 	}
 	
 	for(i=0; i<(levelmaker.rooms.length-1); i++) {
 		for(cursorX=levelmaker.rooms[i].x; cursorX<levelmaker.rooms[i].width; cursorX++) {
 			for(cursorY=levelmaker.rooms[i].y; cursorY<levelmaker.rooms[i].height; cursorY++) {
-				tiles[cursorX][cursorY].display = i.toString();
+				tiles[cursorX][cursorY].display = '.';
+				tiles[cursorX][cursorY].type = 'empty';
 			}
 		}
 	}
 	
 	for(i=0; i<(levelmaker.corridors.length-1); i++) {
-		for(cursorX=0; cursorX<levelmaker.corridors[i].width; cursorX++) {
-			for(cursorY=0; cursorY<levelmaker.corridors[i].height; cursorY++) {
-				var xbase = cursorX + levelmaker.corridors[i].x;
-				var ybase = cursorY + levelmaker.corridors[i].y;
-				tiles[xbase][ybase].display = i.toString();
+		for(cursorX=levelmaker.corridors[i].x; cursorX<levelmaker.corridors[i].width; cursorX++) {
+			for(cursorY=levelmaker.corridors[i].y; cursorY<levelmaker.corridors[i].height; cursorY++) {
+				tiles[cursorX][cursorY].display = '.';
+				tiles[cursorX][cursorY].type = 'empty';
 			}
 		}
 	}
