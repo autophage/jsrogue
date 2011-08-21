@@ -14,23 +14,18 @@ levelmaker.items = [];
 
 // Generates a room of random size and at random position, then adds it to the array of rooms
 levelmaker.makeSquareRoom = function () {
-	var roomWidth = Math.floor(Math.random()*(mapWidth - 20));
-	var roomHeight = Math.floor(Math.random()*(mapHeight - 15));
 	
+	var size = Math.floor(Math.random()*10)
 	
-	var maxLeftMargin = mapWidth - roomWidth;
-	var maxUpperMargin = mapHeight - roomHeight;
+	var x = Math.floor(Math.random()*(mapWidth-10));
 	
-	var x, y;
-	
-	x = Math.floor(Math.random()*maxLeftMargin);
-	y = Math.floor(Math.random()*maxUpperMargin);
+	var y = Math.floor(Math.random()*(mapHeight-10));
 	
 	return {
 		x: x,
 		y: y,
-		width: (roomWidth + 1),
-		height: (roomHeight + 1)
+		width: (x + size),
+		height: (y + size)
 	}
 }
 
