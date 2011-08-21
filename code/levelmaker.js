@@ -36,7 +36,8 @@ levelmaker.makeSquareRoom = function () {
 
 // Goes through the array of rooms, and for each pair of rooms i and i+1 it creates a room (or two rooms) of width 1 to link them
 levelmaker.makeCorridors = function () {
-	for(corridorNo=0; corridorNo < (levelmaker.rooms.length - 2); corridorNo++) {
+	var howManyCorridorsToCreate = levelmaker.rooms.length - 2;
+	for(corridorNo=0; corridorNo < howManyCorridorsToCreate; corridorNo++) {
 		levelmaker.linkByCorridor(levelmaker.rooms[corridorNo], levelmaker.rooms[(corridorNo + 1)]);
 	}
 }
@@ -44,14 +45,14 @@ levelmaker.makeCorridors = function () {
 // Creates a corridor between two rooms
 levelmaker.linkByCorridor = function (firstRoom, secondRoom) {
 	if(secondRoom.x < firstRoom.x && firstRoom.x < (secondRoom.x + secondRoom.width)) {
-		levelmaker.corridors[levelmaker.corridors.length] = {
+		levelmaker.rooms[levelmaker.rooms.length] = {
 			x: levelmaker.randomOverlappingValue(firstRoom.x, (firstRoom.x + firstRoom.width), secondRoom.x, (secondRoom.x + secondRoom.width)),
 			y: levelmaker.whichIsHigher(firstRoom.y, secondRoom.y),
 			width: 1,
 			height: Math.abs(firstRoom.y - secondRoom.y)
 		}
 	} else if(secondRoom.y < firstRoom.y && firstRoom.y < (secondRoom.y + secondRoom.height)) {
-		levelmaker.corridors[levelmaker.corridors.length] = {
+		levelmaker.rooms[levelmaker.rooms.length] = {
 			y: levelmaker.randomOverlappingValue(firstRoom.y, (firstRoom.y + firstRoom.height), secondRoom.y, (secondRoom.y + secondRoom.height)),
 			x: levelmaker.whichIsHigher(firstRoom.x, secondRoom.x),
 			height: 1,
@@ -61,13 +62,13 @@ levelmaker.linkByCorridor = function (firstRoom, secondRoom) {
 		var destinationPoint = {};
 		destinationPoint.x = levelmaker.randomOverlappingValue(firstRoom.x, (firstRoom.x + firstRoom.width), secondRoom.x, (secondRoom.x + secondRoom.width));
 		destinationPoint.y = levelmaker.randomOverlappingValue(firstRoom.y, (firstRoom.y + firstRoom.height), secondRoom.y, (secondRoom.y + secondRoom.height));
-		levelmaker.corridors[levelmaker.corridors.length] = {
+		levelmaker.rooms[levelmaker.rooms.length] = {
 			x: destinationPoint.x,
 			y: levelmaker.whichIsHigher(firstRoom.y, secondRoom.y),
 			width: 1,
 			height: Math.abs(firstRoom.y - secondRoom.y)
 		}
-		levelmaker.corridors[levelmaker.corridors.length] = {
+		levelmaker.rooms[levelmaker.rooms.length] = {
 			x: levelmaker.whichIsHigher(firstRoom.x, secondRoom.x),
 			y: destinationPoint.y,
 			width: Math.abs(firstRoom.x - secondRoom.x),
@@ -134,15 +135,6 @@ levelmaker.generateLevel = function (depth) {
 	for(i=0; i<(levelmaker.rooms.length-1); i++) {
 		for(cursorX=levelmaker.rooms[i].x; cursorX<levelmaker.rooms[i].width; cursorX++) {
 			for(cursorY=levelmaker.rooms[i].y; cursorY<levelmaker.rooms[i].height; cursorY++) {
-				tiles[cursorX][cursorY].display = '.';
-				tiles[cursorX][cursorY].type = 'empty';
-			}
-		}
-	}
-	
-	for(i=0; i<(levelmaker.corridors.length-1); i++) {
-		for(cursorX=levelmaker.corridors[i].x; cursorX<levelmaker.corridors[i].width; cursorX++) {
-			for(cursorY=levelmaker.corridors[i].y; cursorY<levelmaker.corridors[i].height; cursorY++) {
 				tiles[cursorX][cursorY].display = '.';
 				tiles[cursorX][cursorY].type = 'empty';
 			}
