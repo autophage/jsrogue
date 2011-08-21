@@ -13,11 +13,9 @@ function initGame() {
 		alert( stringToPrint );
 	}
 	
-	levelmaker.generateLevel(20);
+	var testLevel = levelmaker.generateLevel(20);
 	
-	domutils.prepareLevel();
-	
-	domutils.updateMap();
+	testLevel = domutils.prepareLevel(testLevel);
 
 }
 

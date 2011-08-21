@@ -1,23 +1,22 @@
 var domutils = {};
 
 // Sets up DOM full of the right divs, etc
-domutils.prepareLevel = function () {
-
-	levelmaker.tileArray = [];
+domutils.prepareLevel = function (tiles) {
 	
 	for(currentRow = 0; currentRow < mapHeight; currentRow++) {
-		levelmaker.tileArray[currentRow] = [];
 		for (currentColumn = 0; currentColumn < mapWidth; currentColumn++) {
-			levelmaker.tileArray[currentRow][currentColumn] = '<div class="tile" id="x' + currentColumn + 'y' + currentRow + '">#</div>';
-			$('div#mapcontainer').append(levelmaker.tileArray[currentRow][currentColumn]);
+			tiles[currentRow][currentColumn].contents = '<div class="tile" id="x' + currentColumn + 'y' + currentRow + '">' + tiles[currentRow][currentColumn].display '</div>';
+			$('div#mapcontainer').append(tiles[currentRow][currentColumn].contents);
 		}
 		levelmaker.tileArray[currentRow][mapWidth] = '<br/>';
 		$('div#mapcontainer').append(levelmaker.tileArray[currentRow][mapWidth]);
 	}
+	
+	return tiles;
 
 }
 
-domutils.updateMap = function() {
+domutils.updateMap = function(tiles) {
 	for(i = 0; i < levelmaker.rooms.length; i++) {
 		console.log('we SHOULD be updating room ' + i + ' now.');
 		for(cursorX = parseInt(levelmaker.rooms[i].startX); cursorX < parseInt(levelmaker.rooms[i].endX); cursorX++) {
