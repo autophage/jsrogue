@@ -31,61 +31,28 @@ levelmaker.makeSquareRoom = function () {
 
 // Goes through the array of rooms, and for each pair of rooms i and i+1 it creates a room (or two rooms) of width 1 to link them
 levelmaker.makeCorridors = function () {
-	var howManyCorridorsToCreate = levelmaker.rooms.length - 2;
-	for(corridorNo=0; corridorNo < howManyCorridorsToCreate; corridorNo++) {
-		levelmaker.linkByCorridor(levelmaker.rooms[corridorNo], levelmaker.rooms[(corridorNo + 1)]);
-	}
-}
-
-// Creates a corridor between two rooms
-levelmaker.linkByCorridor = function (firstRoom, secondRoom) {
-	if(secondRoom.x < firstRoom.x && firstRoom.x < (secondRoom.x + secondRoom.width)) {
-		levelmaker.rooms[levelmaker.rooms.length] = {
-			x: levelmaker.randomOverlappingValue(firstRoom.x, (firstRoom.x + firstRoom.width), secondRoom.x, (secondRoom.x + secondRoom.width)),
-			y: levelmaker.whichIsHigher(firstRoom.y, secondRoom.y),
-			width: 1,
-			height: Math.abs(firstRoom.y - secondRoom.y)
-		}
-	} else if(secondRoom.y < firstRoom.y && firstRoom.y < (secondRoom.y + secondRoom.height)) {
-		levelmaker.rooms[levelmaker.rooms.length] = {
-			y: levelmaker.randomOverlappingValue(firstRoom.y, (firstRoom.y + firstRoom.height), secondRoom.y, (secondRoom.y + secondRoom.height)),
-			x: levelmaker.whichIsHigher(firstRoom.x, secondRoom.x),
-			height: 1,
-			width: Math.abs(firstRoom.x - secondRoom.x)
-		}
-	} else {
-		var destinationPoint = {};
-		destinationPoint.x = levelmaker.randomOverlappingValue(firstRoom.x, (firstRoom.x + firstRoom.width), secondRoom.x, (secondRoom.x + secondRoom.width));
-		destinationPoint.y = levelmaker.randomOverlappingValue(firstRoom.y, (firstRoom.y + firstRoom.height), secondRoom.y, (secondRoom.y + secondRoom.height));
-		levelmaker.rooms[levelmaker.rooms.length] = {
-			x: destinationPoint.x,
-			y: levelmaker.whichIsHigher(firstRoom.y, secondRoom.y),
-			width: 1,
-			height: Math.abs(firstRoom.y - secondRoom.y)
-		}
-		levelmaker.rooms[levelmaker.rooms.length] = {
-			x: levelmaker.whichIsHigher(firstRoom.x, secondRoom.x),
-			y: destinationPoint.y,
-			width: Math.abs(firstRoom.x - secondRoom.x),
-			height: 1
+	var i = 0;
+	for(r in levelmaker.rooms) {
+		if(i < levelmaker.rooms.length - 1) {
+			levelmaker.linkByCorridor(levelmaker.rooms[i], levelmaker.rooms[(i+1)]);
+			i++;
 		}
 	}
 }
 
-levelmaker.randomOverlappingValue = function(first, second, third, fourth) {
-	var args = Array.prototype.slice.call(arguments);
-	var sortedArgs = args.sort();
-	var spacer = sortedArgs[2] - sortedArgs[1];
-	var result = Math.abs(Math.floor(Math.random()*spacer));
-	return result;
-}
-
-levelmaker.whichIsHigher = function(first, second) {
-	if(first > second) {
-		return first;
-	} else {
-		return second;
-	}
+levelmaker.linkByCorridor = function(a, b) {
+	console.log('+-------------------------------------------------------+');
+	console.log(a + ' getting linked to ' + b.x + ', ' + b.y + '.');
+	var nca = {};
+	var ncb = {};
+	nca.x = (a.x<b.x ? a.x : b.x);
+	console.log('   a.x was ' + a.x + ', b.x was ' + b.x + ', new corridor\'s x will be ' + nca.x + '.');
+	nca.width = Math.abs(nca.x - (a.x>b.x ? a.x : b.x));
+	console.log('   and the width linking them will be ' + nca.width);
+	nca.y = (a.y<b.y ? a.y : b.y);
+	nca.height = nca.y + (a.y>b.y ? a.y : b.y);
+	console.log('adding room ' + nca);
+	//TODO add the room using nca's coordinates
 }
 
 // Sprinkle random items throughout the level
@@ -112,6 +79,8 @@ levelmaker.generateLevel = function (depth) {
 		}
 	}
 	
+	levelmaker.makeCorridors();
+	
 	tiles = [];
 	
 	for(cursorX=0; cursorX < mapWidth; cursorX++) {
@@ -124,7 +93,6 @@ levelmaker.generateLevel = function (depth) {
 		}
 	}
 	
-	levelmaker.makeCorridors();
 	levelmaker.sprinkleItems(tiles, depth);
 	
 	for(i=0; i<(levelmaker.rooms.length-1); i++) {
