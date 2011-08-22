@@ -89,17 +89,15 @@ levelmaker.whichIsHigher = function(first, second) {
 }
 
 // Sprinkle random items throughout the level
-levelmaker.addItems = function (depth) {
+levelmaker.sprinkleItems = function (tiles, depth) {
 	
 	var numberOfItems = Math.floor(Math.random()*50)+depth;
 	
 	for(i=0; i<numberOfItems; i++) {
-		items[i] = {
-			x_pos: Math.floor(Math.random() * mapWidth),
-			y_pos: Math.floor(Math.random() * mapHeight),
-			item_type: items[Math.floor(Math.random() * items.length)],
-			material: materials[Math.floor(Math.random() * materials.length)]
-		}
+		var x_pos = Math.floor(Math.random() * mapWidth);
+		var y_pos = Math.floor(Math.random() * mapHeight);
+		var itemToAdd = items.getRandomItem(depth);
+		tiles[x_pos][y_pos].occupants[tiles[x_pos][y_pos].occupants.length] = itemToAdd;
 	}
 }
 
@@ -114,7 +112,7 @@ levelmaker.generateLevel = function (depth) {
 		}
 	}
 	
-	var tiles = [];
+	tiles = [];
 	
 	for(cursorX=0; cursorX < mapWidth; cursorX++) {
 		tiles[cursorX] = [];
@@ -122,16 +120,22 @@ levelmaker.generateLevel = function (depth) {
 			tiles[cursorX][cursorY] = {};
 			tiles[cursorX][cursorY].display = ".";
 			tiles[cursorX][cursorY].type = 'rock';
+			tiles[cursorX][cursorY].occupants = [];
 		}
 	}
 	
 	levelmaker.makeCorridors();
+	levelmaker.sprinkleItems(tiles, depth);
 	
 	for(i=0; i<(levelmaker.rooms.length-1); i++) {
 		for(cursorX=levelmaker.rooms[i].x; cursorX<levelmaker.rooms[i].width; cursorX++) {
 			for(cursorY=levelmaker.rooms[i].y; cursorY<levelmaker.rooms[i].height; cursorY++) {
-				tiles[cursorX][cursorY].display = '.';
-				tiles[cursorX][cursorY].type = 'empty';
+				var tile = tiles[cursorX][cursorY];
+				tile.display = '.';
+				tile.type = 'empty';
+				if(tile.occupants[0] != undefined) {
+					tile.display = tile.occupants[0].display;
+				}
 			}
 		}
 	}
