@@ -4,11 +4,16 @@ var domutils = {};
 domutils.prepareLevel = function (tiles) {
 	for(cursorY=0; cursorY < mapHeight; cursorY++) {
 		for(cursorX=0; cursorX < mapWidth; cursorX++) {
-			var textToAdd = '<div class="tile ' + tiles[cursorX][cursorY].type + '">' + tiles[cursorX][cursorY].display + '</div>';
+			var textToAdd = '<div onmouseover="domutils.setTileDescription(' + cursorX + ', ' + cursorY + ')" class="tile ' + tiles[cursorX][cursorY].type + '">' + tiles[cursorX][cursorY].display + '</div>';
 			$('div#mapcontainer').append(textToAdd);
 		}
 		$('div#mapcontainer').append('<br/>');
 	}
+}
+
+domutils.setTileDescription = function(x, y) {
+	var textToSet = "Your mouse is over " + x + ", " + y + ".";
+	$('div#tiledescription').text(textToSet);
 }
 
 domutils.updateMap = function(tiles) {
