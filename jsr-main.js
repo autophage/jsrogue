@@ -19,6 +19,4 @@ function initGame() {
 
 }
 
-
-
 window.addEventListener("load", initGame, false);
