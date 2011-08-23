@@ -3,6 +3,7 @@ var items = {
 	list: [	
 
 		{
+			article: "a",
 			name: "sword",
 			baseValue: 10,
 			baseWeight: 10,
@@ -13,6 +14,7 @@ var items = {
 		},
 		
 		{
+			article: "a",
 			name: "shield",
 			baseValue: 8,
 			baseWeight: 8,
@@ -23,6 +25,7 @@ var items = {
 		},
 		
 		{
+			article: "a",
 			name: "biscuit",
 			baseValue: 1,
 			baseWeight: 0.5,
@@ -33,6 +36,7 @@ var items = {
 		},
 		
 		{
+			article: "a",
 			name: "mace",
 			baseValue: 12,
 			baseWeight: 15,
@@ -41,6 +45,15 @@ var items = {
 			display: "#",
 			material: materials[0]
 		},
+	],
+	
+	scenery: [
+		{
+			article: "the",
+			name: "floor",
+			material: materials[14],
+			display: "."
+		}
 	]
 };
 

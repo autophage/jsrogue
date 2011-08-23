@@ -12,7 +12,10 @@ domutils.prepareLevel = function (tiles) {
 }
 
 domutils.setTileDescription = function(x, y) {
-	var textToSet = "Your mouse is over " + x + ", " + y + ".";
+	var textToSet = x + ", " + y + ": ";
+	for(var t in tiles[x][y].occupants) {
+		textToSet += tiles[x][y].occupants[t].article + ' ' + tiles[x][y].occupants[t].name + ' made of ' + tiles[x][y].occupants[t].material.name + ', ';
+	}
 	$('div#tiledescription').text(textToSet);
 }
 

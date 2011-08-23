@@ -123,5 +123,14 @@ var materials = [
 		weightMultiplier: 0.9,
 		damageMultiplier: 0.3,
 		edible: true
+	},
+	
+	{
+		name: "stone",
+		materialKey: 14,
+		valueMultiplier: 0.2,
+		weightMultiplier: 2.85,
+		damageMultiplier: 0.7,
+		edible: false
 	}
 ];

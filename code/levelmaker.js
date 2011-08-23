@@ -52,7 +52,7 @@ levelmaker.linkByCorridor = function(a, b) {
 	nca.y = (a.y<b.y ? a.y : b.y);
 	nca.height = nca.y + (a.y>b.y ? a.y : b.y);
 	console.log('adding room ' + nca);
-	//TODO add the room using nca's coordinates
+	//TODO Add a room with coordinates from nca
 }
 
 // Sprinkle random items throughout the level
@@ -90,6 +90,7 @@ levelmaker.generateLevel = function (depth) {
 			tiles[cursorX][cursorY].display = ".";
 			tiles[cursorX][cursorY].type = 'rock';
 			tiles[cursorX][cursorY].occupants = [];
+			tiles[cursorX][cursorY].occupants[0] = items.scenery[0]; // At the bottom of the stack, there's the floor
 		}
 	}
 	
@@ -99,11 +100,8 @@ levelmaker.generateLevel = function (depth) {
 		for(cursorX=levelmaker.rooms[i].x; cursorX<levelmaker.rooms[i].width; cursorX++) {
 			for(cursorY=levelmaker.rooms[i].y; cursorY<levelmaker.rooms[i].height; cursorY++) {
 				var tile = tiles[cursorX][cursorY];
-				tile.display = '.';
 				tile.type = 'empty';
-				if(tile.occupants[0] != undefined) {
-					tile.display = tile.occupants[0].display;
-				}
+				tile.display = tile.occupants[(tile.occupants.length - 1)].display;
 			}
 		}
 	}
