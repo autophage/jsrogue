@@ -49,6 +49,18 @@ var items = {
 			material: materials[0]
 			image: "./assets/images/sprites/items/mace.svg"
 		},
+		
+		{
+			article: "a",
+			name: "buckler",
+			baseValue: 5.5,
+			baseWeight: 5,
+			baseDamage: 1,
+			baseArmor: 5.5,
+			display: "#",
+			material: materials[0],
+			image: "./assets/images/sprites/items/buckler.svg"
+		}
 	],
 	
 	scenery: [
