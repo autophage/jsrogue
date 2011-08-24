@@ -10,7 +10,8 @@ var items = {
 			baseDamage: 5,
 			baseArmor: 2,
 			display: "#",
-			material: materials[0]
+			material: materials[0],
+			image: "./assets/images/sprites/items/sword.svg"
 		},
 		
 		{
@@ -21,7 +22,8 @@ var items = {
 			baseDamage: 3,
 			baseArmor: 8,
 			display: "#",
-			material: materials[0]
+			material: materials[0],
+			image: "./assets/images/sprites/items/shield.svg"
 		},
 		
 		{
@@ -32,7 +34,8 @@ var items = {
 			baseDamage: 0.1,
 			baseArmor: 0,
 			display: "%",
-			material: materials[0]
+			material: materials[0],
+			image: "./assets/images/sprites/items/biscuit.svg"
 		},
 		
 		{
@@ -44,6 +47,7 @@ var items = {
 			baseArmor: .1,
 			display: "#",
 			material: materials[0]
+			image: "./assets/images/sprites/items/mace.svg"
 		},
 	],
 	
