@@ -87,10 +87,9 @@ levelmaker.generateLevel = function (depth) {
 		tiles[cursorX] = [];
 		for(cursorY=0; cursorY < mapHeight; cursorY++) {
 			tiles[cursorX][cursorY] = {};
-			tiles[cursorX][cursorY].display = ".";
 			tiles[cursorX][cursorY].type = 'rock';
 			tiles[cursorX][cursorY].occupants = [];
-			tiles[cursorX][cursorY].occupants[0] = items.scenery[0]; // At the bottom of the stack, there's the floor
+			tiles[cursorX][cursorY].occupants[0] = items.scenery[0]; // At the bottom of the stack, there's the wall; this is overwritten in the case of rooms below
 		}
 	}
 	
@@ -99,9 +98,8 @@ levelmaker.generateLevel = function (depth) {
 	for(i=0; i<(levelmaker.rooms.length-1); i++) {
 		for(cursorX=levelmaker.rooms[i].x; cursorX<levelmaker.rooms[i].width; cursorX++) {
 			for(cursorY=levelmaker.rooms[i].y; cursorY<levelmaker.rooms[i].height; cursorY++) {
-				var tile = tiles[cursorX][cursorY];
-				tile.type = 'empty';
-				tile.display = tile.occupants[(tile.occupants.length - 1)].display;
+				tiles[cursorX][cursorY].type = 'empty';
+				tiles[cursorX][cursorY].occupants[0] = items.scenery[1];
 			}
 		}
 	}

@@ -11,7 +11,7 @@ var items = {
 			baseArmor: 2,
 			display: "#",
 			material: materials[0],
-			image: "./assets/images/sprites/items/sword.svg"
+			image: "./assets/images/sprites/items/sword.png"
 		},
 		
 		{
@@ -23,7 +23,7 @@ var items = {
 			baseArmor: 8,
 			display: "#",
 			material: materials[0],
-			image: "./assets/images/sprites/items/shield.svg"
+			image: "./assets/images/sprites/items/shield.png"
 		},
 		
 		{
@@ -35,7 +35,7 @@ var items = {
 			baseArmor: 0,
 			display: "%",
 			material: materials[0],
-			image: "./assets/images/sprites/items/biscuit.svg"
+			image: "./assets/images/sprites/items/biscuit.png"
 		},
 		
 		{
@@ -46,8 +46,8 @@ var items = {
 			baseDamage: 6,
 			baseArmor: .1,
 			display: "#",
-			material: materials[0]
-			image: "./assets/images/sprites/items/mace.svg"
+			material: materials[0],
+			image: "./assets/images/sprites/items/mace.png"
 		},
 		
 		{
@@ -59,7 +59,7 @@ var items = {
 			baseArmor: 5.5,
 			display: "#",
 			material: materials[0],
-			image: "./assets/images/sprites/items/buckler.svg"
+			image: "./assets/images/sprites/items/buckler.png"
 		}
 	],
 	
@@ -68,7 +68,16 @@ var items = {
 			article: "the",
 			name: "floor",
 			material: materials[14],
-			display: "."
+			display: ".",
+			image: "./assets/images/tiles/floor.svg"
+		},
+		
+		{
+			article: "a",
+			name: "wall",
+			material: materials[14],
+			display: ".",
+			image: "./assets/images/tiles/wall.svg"
 		}
 	]
 };
