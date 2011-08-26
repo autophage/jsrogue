@@ -27,6 +27,7 @@ creatureProto = {
 		this.position.y += shiftY;
 		this.currentIndex = currentLevel[this.position.x][this.position.y].occupants.length;
 		currentLevel[this.position.x][this.position.y].occupants.push(this);
+		domutils.updateDOM(this.position.x, this.position.y);
 		console.log(this.article + ' ' + this.name + ' is now located at ' + this.position.x + ', ' + this.position.y + '.');
 	}
 }

@@ -6,7 +6,7 @@ domutils.prepareLevel = function (tiles) {
 		for(cursorX=0; cursorX < mapWidth; cursorX++) {
 			var textToAdd = '<div onmouseover="domutils.setTileDescription(' +
 				cursorX + ', ' + cursorY +
-				')" class="tile" id=x"' + cursorX + 'y' + cursorY + '">' +
+				')" class="tile" id="x' + cursorX + 'y' + cursorY + '">' +
 				'<img class="item" src="' + tiles[cursorX][cursorY].occupants[(tiles[cursorX][cursorY].occupants.length - 1)].image + '"></img>' +
 				'</div>';
 			$('div#mapcontainer').append(textToAdd);
@@ -31,7 +31,12 @@ domutils.setTileDescription = function(x, y) {
 	$('div#tiledescription').text(textToSet);
 }
 
-domutils.updateDOM = function(x, y, tile) {
+domutils.updateDOM = function(x, y) {
 	var divToSearchFor = 'div#mapcontainer div#x' + x + 'y' + y;
-	$(divToSearchFor + ' img').attr('src', tile.occupants[length-1].image);
+	$(divToSearchFor).replaceWith(
+		'<div onmouseover="domutils.setTileDescription(' +
+				x + ', ' + y +
+				')" class="tile" id="x' + x + 'y' + y + '">' +
+				'<img class="item" src="' + currentLevel[x][y].occupants[(currentLevel[x][y].occupants.length - 1)].image + '"></img>' +
+				'</div>');
 }
