@@ -19,15 +19,27 @@ creatureProto = {
 	
 	material: materials[13],
 	
+	setInitialPosition: function(x, y) {
+		this.position.x = x;
+		this.position.y = y;
+		currentLevel[x][y].occupants.push(this);
+		domutils.updateDOM(x, y);
+	},
+	
 	eachTurn: function() {
-		currentLevel[this.position.x][this.position.y].occupants.pop();
+		var x = this.position.x;
+		var y = this.position.y;
+		currentLevel[x][y].occupants.pop();
+		domutils.updateDOM(x, y);
 		var shiftX = Math.floor(Math.random() * 3) - 1;
 		var shiftY = Math.floor(Math.random() * 3) - 1;
 		this.position.x += shiftX;
 		this.position.y += shiftY;
-		this.currentIndex = currentLevel[this.position.x][this.position.y].occupants.length;
-		currentLevel[this.position.x][this.position.y].occupants.push(this);
-		domutils.updateDOM(this.position.x, this.position.y);
+		var x = this.position.x;
+		var y = this.position.y;
+		this.currentIndex = currentLevel[x][y].occupants.length;
+		currentLevel[x][y].occupants.push(this);
+		domutils.updateDOM(x, y);
 		console.log(this.article + ' ' + this.name + ' is now located at ' + this.position.x + ', ' + this.position.y + '.');
 	}
 }
