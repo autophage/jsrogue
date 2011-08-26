@@ -60,27 +60,39 @@ var items = {
 			display: "#",
 			material: materials[0],
 			image: "./assets/images/sprites/items/buckler.png"
-		}
-	],
-	
-	scenery: [
-		{
-			article: "the",
-			name: "floor",
-			material: materials[14],
-			display: ".",
-			image: "./assets/images/tiles/floor.svg"
 		},
 		
 		{
 			article: "a",
-			name: "wall",
-			material: materials[14],
-			display: ".",
-			image: "./assets/images/tiles/wall.svg"
+			name: "lump",
+			baseValue: 1.0,
+			baseWeight: 1,
+			baseDamage: 0.2,
+			baseArmor: 0.2,
+			material: materials[0],
+			image: "./assets/images/sprites/items/lump.png"
 		}
-	]
+	],
+	
+	scenery: []
+
 };
+
+items.scenery[0] =	{
+		article: "the",
+		name: "floor",
+		material: materials[14],
+		display: ".",
+		image: "./assets/images/tiles/floor.png"
+	};
+
+items.scenery[1] = 	{
+		article: "a",
+		name: "wall",
+		material: materials[14],
+		display: ".",
+		image: "./assets/images/tiles/wall.png"
+	};
 
 // TODO use 'depth' to be more likely to return items made of something expensive the lower the player is
 // TODO Make sure that things are made of things that they'd likely be made of, so we don't get oak biscuits and such

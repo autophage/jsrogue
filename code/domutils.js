@@ -6,14 +6,20 @@ domutils.prepareLevel = function (tiles) {
 		for(cursorX=0; cursorX < mapWidth; cursorX++) {
 			var textToAdd = '<div onmouseover="domutils.setTileDescription(' +
 				cursorX + ', ' + cursorY +
-				')" class="tile ' + tiles[cursorX][cursorY].type +
-				+ 'background-image="' + tiles[cursorX][cursorY].occupants[0].image + '">' +
-//				'<img class="tile" src="' + tiles[cursorX][cursorY].occupants[0].image + '"></img>' +
+				')" class="tile" id=x"' + cursorX + 'y' + cursorY + '">' +
 				'<img class="item" src="' + tiles[cursorX][cursorY].occupants[(tiles[cursorX][cursorY].occupants.length - 1)].image + '"></img>' +
 				'</div>';
 			$('div#mapcontainer').append(textToAdd);
 		}
 		$('div#mapcontainer').append('<br/>');
+	}
+}
+
+domutils.redrawLevel = function(level) {
+	for(y=0; y < mapHeight; y++) {
+		for(x=0; x < mapWidth; x++) {
+			domutils.updateDOM(x, y, level[x][y]);
+		}
 	}
 }
 
@@ -25,30 +31,7 @@ domutils.setTileDescription = function(x, y) {
 	$('div#tiledescription').text(textToSet);
 }
 
-domutils.updateMap = function(tiles) {
-	for(i = 0; i < levelmaker.rooms.length; i++) {
-		console.log('we SHOULD be updating room ' + i + ' now.');
-		for(cursorX = parseInt(levelmaker.rooms[i].startX); cursorX < parseInt(levelmaker.rooms[i].endX); cursorX++) {
-			console.log('  we SHOULD be doing stuff using ' + cursorX + ' now.');
-			for(cursorY = parseInt(levelmaker.rooms[i].startY); cursorY < parseInt(levelmaker.rooms[i].endY); cursorY++) {
-				console.log('    we SHOULD be setting ' + cursorX + ', ' + cursorY + ' to display "' + i + '" now.');
-				levelmaker.updateDOM(cursorX, cursorY, i)
-			}
-		}
-		
-	}
-	
-	return levelmaker.tileArray;
-}
-
-domutils.updateDOM = function(x, y, to_display) {
-	if(x>=mapWidth || y>=mapHeight) {
-		console.log('----something wrong!');
-		console.log('tried to update x=' + x + ', y=' + y);
-		return 0;
-	}
-	var divToSearchFor = 'div#mapcontainer div#x' + y + 'y' + x;
-	console.log('current div to search for: ' + divToSearchFor);
-	levelmaker.tileArray[x][y] = '<div class="tile" id="x' + x + 'y' + y + '">' + to_display + '</div>';
-	$(divToSearchFor).text(to_display);
+domutils.updateDOM = function(x, y, tile) {
+	var divToSearchFor = 'div#mapcontainer div#x' + x + 'y' + y;
+	$(divToSearchFor + ' img').attr('src', tile.occupants[length-1].image);
 }

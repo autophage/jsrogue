@@ -17,22 +17,21 @@ div#mapcontainer img {
 	margin: 0px;
 	border: 0px;
 	padding: 0px;
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+	-ms-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
 }
 
 div#mapcontainer img:hover {
-	background: black;
-	color: white;
-	-moz-box-shadow: 0 0 1px 1px #222 inset;
-	-webkit-box-shadow: 0 0 1px 1px#222 inset;
-	box-shadow: 0 0 1px 1px #222 inset;
+	opacity: 0.5;
 }
 
 div.tile {
 	display: inline-block;
 	font-family: monospace;
 	font-size: 20px;
-	background: black;
-	color: white;
 	margin: 0px;
 	border: 0px;
 	padding: 0px;
@@ -44,8 +43,6 @@ div.tile {
 }
 
 div.tile:hover {
-	background: black;
-	color: white;
 	-moz-box-shadow: 0 0 1px 1px #222 inset;
 	-webkit-box-shadow: 0 0 1px 1px#222 inset;
 	box-shadow: 0 0 1px 1px #222 inset;

@@ -1,12 +1,12 @@
-var mapWidth = 90;
+var mapWidth = 60;
 var mapHeight = 30;
 
 function initGame() {
 	
-	var testLevel = levelmaker.generateLevel(20);
+	currentLevel = levelmaker.generateLevel(20);
 	turn = 0;
 	
-	domutils.prepareLevel(testLevel);
+	domutils.prepareLevel(currentLevel);
 
 }
 

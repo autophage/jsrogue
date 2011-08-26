@@ -1,7 +1,7 @@
 creatureProto = {
 	article: "a",
 	name: "Primordial Creature",
-	display: "C",
+	image: "./assets/images/sprites/creatures/primordial_creature.png",
 	limbs: {
 		body: {
 			maxHits: 10,
@@ -11,12 +11,22 @@ creatureProto = {
 	},
 	
 	position: {
-		x: 0,
-		y: 0
+		x: -1,
+		y: -1
 	},
 	
+	currentIndex: 0,
+	
+	material: materials[13],
+	
 	eachTurn: function() {
-		var direction = utils.pickADirectionAtRandom();
-		utils.translate(this, direction);
+		currentLevel[this.position.x][this.position.y].occupants.pop();
+		var shiftX = Math.floor(Math.random() * 3) - 1;
+		var shiftY = Math.floor(Math.random() * 3) - 1;
+		this.position.x += shiftX;
+		this.position.y += shiftY;
+		this.currentIndex = currentLevel[this.position.x][this.position.y].occupants.length;
+		currentLevel[this.position.x][this.position.y].occupants.push(this);
+		console.log(this.article + ' ' + this.name + ' is now located at ' + this.position.x + ', ' + this.position.y + '.');
 	}
 }
