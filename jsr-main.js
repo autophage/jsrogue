@@ -10,27 +10,24 @@ function initGame() {
 
 }
 
-function gameTurn() {
-	turn++;
-	for(var a in actorsExisting) {
+function doATurn() {
+	for(a in currentLevel.actors) {
 		try {
-			a.eachTurn();
-		} catch (e) {
-			console.log(a + " does not do anything this turn.");
+			currentLevel.actors[a].eachTurn(currentLevel);
+		} catch(e) {
+			alert(e);
 		}
 	}
 }
 
-function doATurn() {
-	for(a in currentLevel.actors) {
-		currentLevel.actors[a].eachTurn();
-	}
-}
-
-function addACreature() {
+function addACreature(x, y, level) {
 	var toAdd = new CreatureProto();
-	toAdd.setInitialPosition(Math.floor(Math.random()*mapWidth), Math.floor(Math.random()*mapHeight));
-	currentLevel.actors.push(toAdd);
+	if(level[x][y].occupants[0] == items.scenery[1]) {
+		console.log('Cannot put a creature at ' + x + ', ' + y + '.  There is a wall in the way.');
+		return;
+	}
+	toAdd.setInitialPosition(x, y, level);
+	level.actors.push(toAdd);
 }
 
 window.addEventListener("load", initGame, false);

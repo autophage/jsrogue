@@ -73,6 +73,8 @@ levelmaker.sprinkleItems = function (tiles, depth) {
 
 levelmaker.generateLevel = function (depth) {
 	
+	var creaturesToAdd = Math.floor(Math.random()*20);
+	
 	// Until you've created a number of rooms equal to numberOfRooms, make another room
 	for(i = 0; i < levelmaker.numberOfRooms; i++) {
 		var roomToAdd = 0;
@@ -109,6 +111,17 @@ levelmaker.generateLevel = function (depth) {
 	
 	tiles.actors = levelmaker.actors;
 	
+	for(i=0; i<creaturesToAdd; i++) {
+		var roomToPutItIn = Math.floor(Math.random()*levelmaker.rooms.length);
+		var xPosInRoom = Math.floor(Math.random()*levelmaker.rooms[roomToPutItIn].width);
+		var yPosInRoom = Math.floor(Math.random()*levelmaker.rooms[roomToPutItIn].height);
+		var xPosInLevel = levelmaker.rooms[roomToPutItIn].x + xPosInRoom;
+		var yPosInLevel = levelmaker.rooms[roomToPutItIn].y + yPosInRoom;
+		if((xPosInLevel < mapWidth) && (yPosInLevel < mapHeight)) {
+			addACreature(xPosInLevel, yPosInLevel, tiles);
+		}
+	}
+
 	return tiles;
 
 }

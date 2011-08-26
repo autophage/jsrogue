@@ -20,27 +20,36 @@ function CreatureProto() {
 		
 		material: materials[13],
 		
-		setInitialPosition: function(x, y) {
+		inventory: [],
+		
+		setInitialPosition: function(x, y, level) {
 			this.position.x = x;
 			this.position.y = y;
-			currentLevel[x][y].occupants.push(this);
-			domutils.updateDOM(x, y);
+			level[x][y].occupants.push(this);
+			domutils.updateDOM(x, y, level);
 		},
 		
-		eachTurn: function() {
+		eachTurn: function(level) {
 			var x = this.position.x;
 			var y = this.position.y;
-			currentLevel[x][y].occupants.pop();
-			domutils.updateDOM(x, y);
+			var oldScenery = level[x][y].occupants[0];
+			level[x][y].occupants.pop();
+			level[x][y].occupants[0] = oldScenery;
+			domutils.updateDOM(x, y, level);
 			var shiftX = Math.floor(Math.random() * 3) - 1;
 			var shiftY = Math.floor(Math.random() * 3) - 1;
+			var testPosition = {};
+			testPosition.x = this.position.x + shiftX;
+			testPosition.y = this.position.y + shiftY;
+			if(level[testPosition.x][testPosition.y].occupants[0] == items.scenery[1]) {
+				return;
+			}
 			this.position.x += shiftX;
 			this.position.y += shiftY;
 			var x = this.position.x;
 			var y = this.position.y;
-			this.currentIndex = currentLevel[x][y].occupants.length;
-			currentLevel[x][y].occupants.push(this);
-			domutils.updateDOM(x, y);
+			level[x][y].occupants.push(this);
+			domutils.updateDOM(x, y, level);
 			console.log(this.article + ' ' + this.name + ' is now located at ' + this.position.x + ', ' + this.position.y + '.');
 		}
 	}
