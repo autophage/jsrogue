@@ -7,10 +7,6 @@ DIR_DOWN_LEFT: 5;
 DIR_LEFT: 6;
 DIR_UP_LEFT: 7;
 
-// This is a list of things with an eachTurn() method...
-//TODO Modify this so that it differentiates between "on this level" and "not on this level"
-var actorsExisting = [];
-
 var utils = {};
 
 utils.getObjectProperties = function(obj){

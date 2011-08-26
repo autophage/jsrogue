@@ -12,6 +12,9 @@ levelmaker.corridors = [];
 // Array that holds items
 levelmaker.items = [];
 
+// Array of things with an eachTurn method
+levelmaker.actors = [];
+
 // Generates a room of random size and at random position, then adds it to the array of rooms
 levelmaker.makeSquareRoom = function () {
 	
@@ -103,6 +106,8 @@ levelmaker.generateLevel = function (depth) {
 			}
 		}
 	}
+	
+	tiles.actors = levelmaker.actors;
 	
 	return tiles;
 

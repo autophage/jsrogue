@@ -21,4 +21,16 @@ function gameTurn() {
 	}
 }
 
+function doATurn() {
+	for(a in currentLevel.actors) {
+		currentLevel.actors[a].eachTurn();
+	}
+}
+
+function addACreature() {
+	var toAdd = new CreatureProto();
+	toAdd.setInitialPosition(Math.floor(Math.random()*mapWidth), Math.floor(Math.random()*mapHeight));
+	currentLevel.actors.push(toAdd);
+}
+
 window.addEventListener("load", initGame, false);
