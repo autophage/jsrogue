@@ -95,6 +95,8 @@ levelmaker.generateLevel = function (depth) {
 			tiles[cursorX][cursorY].type = 'rock';
 			tiles[cursorX][cursorY].occupants = [];
 			tiles[cursorX][cursorY].occupants[0] = items.scenery[1]; // At the bottom of the stack, there's the wall; this is overwritten in the case of rooms below
+			tiles[cursorX][cursorY].xPos = cursorX;
+			tiles[cursorX][cursorY].yPos = cursorY;
 		}
 	}
 	

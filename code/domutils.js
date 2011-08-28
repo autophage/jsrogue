@@ -32,11 +32,5 @@ domutils.setTileDescription = function(x, y) {
 }
 
 domutils.updateDOM = function(x, y, level) {
-	var divToSearchFor = 'div#mapcontainer div#x' + x + 'y' + y;
-	$(divToSearchFor).replaceWith(
-		'<div onmouseover="domutils.setTileDescription(' +
-				x + ', ' + y +
-				')" class="tile" id="x' + x + 'y' + y + '">' +
-				'<img class="item" src="' + level[x][y].occupants[(level[x][y].occupants.length - 1)].image + '"></img>' +
-				'</div>');
+	levelpainter.paint(level);
 }

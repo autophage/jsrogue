@@ -24,6 +24,7 @@
 		<script type="text/javascript" src="./code/materials.js"></script>
 		<script type="text/javascript" src="./code/creature.js"></script>
 		<script type="text/javascript" src="./code/items.js"></script>
+		<script type="text/javascript" src="./code/levelpainter.js"></script>
 		<script type="text/javascript" src="./code/levelmaker.js"></script>
 		<script type="text/javascript" src="./jsr-main.js"></script>
 	</head>
@@ -38,7 +39,9 @@
 				</p>
 			</nav>
 			<div id="gamecontainer">
-				<div id="mapcontainer"></div>
+				<div id="mapcontainer">
+					<canvas width="960" height="480" id="levelmap">Sorry, your browser does not support html5's canvas.</canvas>
+				</div>
 				<div id="tiledescription">Mouse-over a tile to see what's there.</div>
 				<div id="controls">
 					<button type="button" id="eachturn" onclick="doATurn()">Do a Turn</button>

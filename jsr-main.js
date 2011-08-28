@@ -6,7 +6,9 @@ function initGame() {
 	currentLevel = levelmaker.generateLevel(20);
 	turn = 0;
 	
-	domutils.prepareLevel(currentLevel);
+	levelpainter.paint(currentLevel);
+	
+	
 
 }
 
@@ -14,6 +16,7 @@ function doATurn() {
 	for(a in currentLevel.actors) {
 		try {
 			currentLevel.actors[a].eachTurn(currentLevel);
+			levelpainter.paint(currentLevel);
 		} catch(e) {
 			alert(e);
 		}
