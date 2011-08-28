@@ -133,6 +133,8 @@ function Player() {
 			level[x][y].occupants.push(this);
 			levelpainter.updateTile(level, x, y)
 			console.log(this.article + ' ' + this.name + ' is now located at ' + this.position.x + ', ' + this.position.y + '.');
+			
+			doATurn();
 		}
 	}
 }

@@ -8,7 +8,15 @@ function initGame() {
 	
 	levelpainter.paint(currentLevel);
 	
-	
+	// TODO on mouse enters map area, register this
+	$("canvas#levelmap").mousemove(function(e){
+//      var clientCoords = "( " + e.clientX + ", " + e.clientY + " )";
+//     $("div#tiledescription").text("( e.pageX, e.pageY ) - " + pageCoords + "\n" + "( e.clientX, e.clientY ) - " + clientCoords);
+	$("div#tiledescription").text(utils.getTileOccupants(currentLevel, e.clientX, e.clientY));
+	levelpainter.placeRect(currentLevel, e.clientX, e.clientY);
+    });
+
+	// TODO on mouse leaves map area, unregister that mousemove handler
 
 }
 
@@ -20,6 +28,9 @@ function doATurn() {
 		} catch(e) {
 			alert(e);
 		}
+	}
+	if(playerIsAlive == true) {
+		Player.eachTurn(currentLevel);
 	}
 }
 

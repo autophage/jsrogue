@@ -20,3 +20,10 @@ utils.isLocationAWall = function(x, y, level) {
 		return false;
 	}
 };
+
+utils.getTileOccupants = function(level, x, y) {
+	var xTileCoord = Math.floor(x / 16);
+	var yTileCoord = Math.floor(y / 16);
+	var occupantsString = ""+level[xTileCoord][yTileCoord].occupants;
+	return occupantsString;
+}
