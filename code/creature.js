@@ -26,7 +26,7 @@ function CreatureProto() {
 			this.position.x = x;
 			this.position.y = y;
 			level[x][y].occupants.push(this);
-			levelpainter.paint(level);
+			levelpainter.updateTile(level, x, y);
 		},
 		
 		eachTurn: function(level) {
@@ -35,7 +35,7 @@ function CreatureProto() {
 			var oldScenery = level[x][y].occupants[0];
 			level[x][y].occupants.pop();
 			level[x][y].occupants[0] = oldScenery;
-			levelpainter.paint(level);
+			levelpainter.updateTile(level, x, y);
 			var shiftX = Math.floor(Math.random() * 3) - 1;
 			var shiftY = Math.floor(Math.random() * 3) - 1;
 			var testPosition = {};
@@ -49,7 +49,7 @@ function CreatureProto() {
 			var x = this.position.x;
 			var y = this.position.y;
 			level[x][y].occupants.push(this);
-			levelpainter.paint(level);
+			levelpainter.updateTile(level, x, y);
 			console.log(this.article + ' ' + this.name + ' is now located at ' + this.position.x + ', ' + this.position.y + '.');
 		}
 	}
@@ -107,7 +107,7 @@ function Player() {
 			this.position.x = x;
 			this.position.y = y;
 			level[x][y].occupants.push(this);
-			levelpainter.paint(level);
+			levelpainter.updateTile(level, x, y);
 		},
 		
 		//TODO Replace player's eachTurn with sit and wait for the player to do something, then respond appropriately'
@@ -117,7 +117,7 @@ function Player() {
 			var oldScenery = level[x][y].occupants[0];
 			level[x][y].occupants.pop();
 			level[x][y].occupants[0] = oldScenery;
-			levelpainter.paint(level);
+			levelpainter.updateTile(level, x, y);
 			var shiftX = Math.floor(Math.random() * 3) - 1;
 			var shiftY = Math.floor(Math.random() * 3) - 1;
 			var testPosition = {};
@@ -131,7 +131,7 @@ function Player() {
 			var x = this.position.x;
 			var y = this.position.y;
 			level[x][y].occupants.push(this);
-			levelpainter.paint(level)
+			levelpainter.updateTile(level, x, y)
 			console.log(this.article + ' ' + this.name + ' is now located at ' + this.position.x + ', ' + this.position.y + '.');
 		}
 	}
