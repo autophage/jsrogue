@@ -110,31 +110,54 @@ function Player() {
 			levelpainter.updateTile(level, x, y);
 		},
 		
-		//TODO Replace player's eachTurn with sit and wait for the player to do something, then respond appropriately'
-		eachTurn: function(level) {
+		move: function(dir, level) {
+			
 			var x = this.position.x;
 			var y = this.position.y;
 			var oldScenery = level[x][y].occupants[0];
 			level[x][y].occupants.pop();
 			level[x][y].occupants[0] = oldScenery;
 			levelpainter.updateTile(level, x, y);
-			var shiftX = Math.floor(Math.random() * 3) - 1;
-			var shiftY = Math.floor(Math.random() * 3) - 1;
-			var testPosition = {};
-			testPosition.x = this.position.x + shiftX;
-			testPosition.y = this.position.y + shiftY;
-			if(level[testPosition.x][testPosition.y].occupants[0] == items.scenery[1]) {
-				return;
+			
+			switch(dir) {
+				case WAIT:
+					break;
+				case NORTH:
+					this.position.y -= 1;
+					break;
+				case NORTHEAST:
+					this.position.x += 1;
+					this.position.y -= 1;
+					break;
+				case EAST:
+					this.position.x += 1;
+					break;
+				case SOUTHEAST:
+					this.position.x += 1;
+					this.position.y += 1;
+					break;
+				case SOUTH:
+					this.position.y += 1;
+					break;
+				case SOUTHWEST:
+					this.position.y += 1;
+					this.position.x -= 1;
+					break;
+				case WEST:
+					this.position.x -= 1;
+					break;
+				case NORTHWEST:
+					this.position.x -= 1;
+					this.position.y -= 1;
+					break;
 			}
-			this.position.x += shiftX;
-			this.position.y += shiftY;
+			
 			var x = this.position.x;
 			var y = this.position.y;
 			level[x][y].occupants.push(this);
-			levelpainter.updateTile(level, x, y)
+			levelpainter.updateTile(level, x, y);
 			console.log(this.article + ' ' + this.name + ' is now located at ' + this.position.x + ', ' + this.position.y + '.');
-			
-			doATurn();
 		}
+		
 	}
 }
