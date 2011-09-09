@@ -11,12 +11,31 @@ levelpainter.paint = function(level) {
 
 levelpainter.updateTile = function(level, x, y) {
 	var ctx = document.getElementById('levelmap').getContext('2d');
-	var toDraw = new Image();
-	toDraw.src = level[x][y].occupants[(level[x][y].occupants.length - 1)].image;
-	ctx.drawImage(toDraw, level[x][y].xPos*16, level[x][y].yPos*16, 16, 16);
+	
+	if(level[x][y].isPassable == false) {
+		ctx.fillStyle = "rgb(100, 75, 50)";
+		ctx.fillRect(level[x][y].xPos*16, level[x][y].yPos*16, 16, 16);
+	} else if(level[x][y].isPassable == true) {
+		
+		ctx.fillStyle = "rgb(225, 200, 175)";
+		ctx.fillRect(level[x][y].xPos*16, level[x][y].yPos*16, 16, 16);
+		
+		if(level[x][y].occupants.length != 0) {
+			var toDraw = new Image();
+			var whatToDraw = level[x][y].occupants.length - 1;
+			toDraw.src = level[x][y].occupants[whatToDraw].image;
+			ctx.drawImage(toDraw, level[x][y].xPos*16, level[x][y].yPos*16, 16, 16);
+		}
+	}
 }
 
 levelpainter.placeRect = function(level, x, y) {
 	var ctx = document.getElementById('levelmap').getContext('2d');
-	ctx.strokeRect(level[x][y].xPos*16, level[x][y].yPos*16, 16, 16);
+	ctx.clearRect(level[x][y].xPos*16, level[x][y].yPos*16, 16, 16);
+}
+
+levelpainter.clearScreen = function() {
+	var ctx = document.getElementById('levelmap').getContext('2d');
+	ctx.fillStyle = "rgb(0, 0, 0)";
+	ctx.fillRect(0, 0, mapWidth*16, mapHeight*16);
 }

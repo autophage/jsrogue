@@ -127,3 +127,21 @@ levelmaker.generateLevel = function (depth) {
 	return tiles;
 
 }
+
+levelmaker.generateBlankLevel = function() {
+	
+	var tiles = [];
+	
+	for(cursorX=0; cursorX < mapWidth; cursorX++) {
+		tiles[cursorX] = [];
+		for(cursorY=0; cursorY < mapHeight; cursorY++) {
+			tiles[cursorX][cursorY] = {};
+			tiles[cursorX][cursorY].occupants = [];
+			tiles[cursorX][cursorY].isPassable = true;
+			tiles[cursorX][cursorY].xPos = cursorX;
+			tiles[cursorX][cursorY].yPos = cursorY;
+		}
+	}
+	
+	return tiles;
+}

@@ -26,7 +26,6 @@ function CreatureProto() {
 			this.position.x = x;
 			this.position.y = y;
 			level[x][y].occupants.push(this);
-			levelpainter.updateTile(level, x, y);
 		},
 		
 		eachTurn: function(level) {
@@ -35,22 +34,20 @@ function CreatureProto() {
 			var oldScenery = level[x][y].occupants[0];
 			level[x][y].occupants.pop();
 			level[x][y].occupants[0] = oldScenery;
-			levelpainter.updateTile(level, x, y);
 			var shiftX = Math.floor(Math.random() * 3) - 1;
 			var shiftY = Math.floor(Math.random() * 3) - 1;
 			var testPosition = {};
 			testPosition.x = this.position.x + shiftX;
 			testPosition.y = this.position.y + shiftY;
-			if(level[testPosition.x][testPosition.y].occupants[0] == items.scenery[1]) {
-				return;
+			if(level[testPosition.x][testPosition.y].occupants[0] != items.scenery[1]) {
+				this.position.x += shiftX;
+				this.position.y += shiftY;
+				var x = this.position.x;
+				var y = this.position.y;
+				level[x][y].occupants.push(this);
+				console.log(this.article + ' ' + this.name + ' is now located at ' + this.position.x + ', ' + this.position.y + '.');
 			}
-			this.position.x += shiftX;
-			this.position.y += shiftY;
-			var x = this.position.x;
-			var y = this.position.y;
-			level[x][y].occupants.push(this);
-			levelpainter.updateTile(level, x, y);
-			console.log(this.article + ' ' + this.name + ' is now located at ' + this.position.x + ', ' + this.position.y + '.');
+			level[this.position.x][this.position.y].occupants.push(this);
 		}
 	}
 }
@@ -107,7 +104,6 @@ function Player() {
 			this.position.x = x;
 			this.position.y = y;
 			level[x][y].occupants.push(this);
-			levelpainter.updateTile(level, x, y);
 		},
 		
 		move: function(dir, level) {
@@ -117,7 +113,6 @@ function Player() {
 			var oldScenery = level[x][y].occupants[0];
 			level[x][y].occupants.pop();
 			level[x][y].occupants[0] = oldScenery;
-			levelpainter.updateTile(level, x, y);
 			
 			switch(dir) {
 				case WAIT:
@@ -155,7 +150,6 @@ function Player() {
 			var x = this.position.x;
 			var y = this.position.y;
 			level[x][y].occupants.push(this);
-			levelpainter.updateTile(level, x, y);
 			console.log(this.article + ' ' + this.name + ' is now located at ' + this.position.x + ', ' + this.position.y + '.');
 		}
 		

@@ -14,7 +14,7 @@ var NORTHWEST = 8;
 
 function initGame() {
 	
-	currentLevel = levelmaker.generateLevel(20);
+	currentLevel = levelmaker.generateBlankLevel(20);
 	turn = 0;
 	
 	levelpainter.paint(currentLevel);
@@ -73,11 +73,12 @@ function doATurn() {
 	for(a in currentLevel.actors) {
 		try {
 			currentLevel.actors[a].eachTurn(currentLevel);
-			levelpainter.paint(currentLevel);
 		} catch(e) {
 			alert(e);
 		}
 	}
+	levelpainter.clearScreen();
+	levelpainter.paint(currentLevel);
 }
 
 function addACreature(x, y, level) {
