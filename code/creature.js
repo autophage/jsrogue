@@ -110,9 +110,8 @@ function Player() {
 			
 			var x = this.position.x;
 			var y = this.position.y;
-			var oldScenery = level[x][y].occupants[0];
+			
 			level[x][y].occupants.pop();
-			level[x][y].occupants[0] = oldScenery;
 			
 			switch(dir) {
 				case WAIT:

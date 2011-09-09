@@ -36,6 +36,5 @@ levelpainter.placeRect = function(level, x, y) {
 
 levelpainter.clearScreen = function() {
 	var ctx = document.getElementById('levelmap').getContext('2d');
-	ctx.fillStyle = "rgb(0, 0, 0)";
-	ctx.fillRect(0, 0, mapWidth*16, mapHeight*16);
+	ctx.clearRect(0, 0, 960, 480);
 }
