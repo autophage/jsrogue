@@ -137,11 +137,41 @@ levelmaker.generateBlankLevel = function() {
 		for(cursorY=0; cursorY < mapHeight; cursorY++) {
 			tiles[cursorX][cursorY] = {};
 			tiles[cursorX][cursorY].occupants = [];
-			tiles[cursorX][cursorY].isPassable = true;
+			tiles[cursorX][cursorY].isPassable = false;
 			tiles[cursorX][cursorY].xPos = cursorX;
 			tiles[cursorX][cursorY].yPos = cursorY;
 		}
 	}
 	
+	levelmaker.digInitialRoom(tiles);
+	
+	/*
+	 *  So I think here the thing to do is:
+	 * 		Get an array of all tiles that are passable.
+	 * 		Pick a random member of that array.
+	 * 		Create a corridor from that tile to somewhere else.
+	 * 		Dig a new room with the center at the end of that corridor.
+	 * 	Then repeat that.
+	 * 
+	 * Do this a number of times... maybe a random number of times between 10 and 40?
+	 * 
+	 */
+	
 	return tiles;
+}
+
+levelmaker.digInitialRoom = function(tiles) {
+	levelmaker.dig(tiles,
+		(mapWidth/2)-Math.floor(Math.random()*9),
+		(mapHeight/2)-Math.floor(Math.random()*9),
+		Math.floor(Math.random()*9)+3,
+		Math.floor(Math.random()*9)+3);
+}
+
+levelmaker.dig = function(level, x, y, width, height) {
+	for(ix=0; ix<width; ix++) {
+		for(iy=0; iy<height; iy++) {
+			level[ix+x][iy+y].isPassable = true;
+		}
+	}
 }
