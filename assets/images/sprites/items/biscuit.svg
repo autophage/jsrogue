@@ -16,7 +16,10 @@
    id="svg3780"
    version="1.1"
    inkscape:version="0.48.1 "
-   sodipodi:docname="shield.svg">
+   sodipodi:docname="biscuit.svg"
+   inkscape:export-filename="C:\Users\Eric\Documents\Aptana Studio 3 Workspace\jsrogue\assets\images\sprites\items\biscuit.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs3782">
     <linearGradient
@@ -54,7 +57,9 @@
      inkscape:window-height="1005"
      inkscape:window-x="-9"
      inkscape:window-y="-9"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true" />
   <metadata
      id="metadata3785">
     <rdf:RDF>
@@ -72,23 +77,27 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-924.36218)">
-    <path
-       style="fill:#646464;fill-opacity:1;stroke:#000000;stroke-width:0.79485112000000002px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 31.504569,979.22389 6.245258,34.49081 50.245947,0 14.051826,-34.49081"
-       id="path4846"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:#c8c8c8;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
-       d="m 40.535714,56.214286 c 0,0 -34.9999997,0.714285 -26.785714,-14.285715 8.214286,-15 10.178571,-18.392857 21.964286,-20.178571 C 47.5,19.964285 63.035714,16.392857 63.392857,26.035714 63.75,35.678571 63.75,31.214286 63.75,31.214286 c 0,0 3.928572,-23.3928577 22.321429,-15.178572 18.392861,8.214286 27.142861,36.607143 27.142861,36.607143 0,0 -8.03572,9.821428 -26.785718,4.821429"
-       id="path4850"
-       inkscape:connector-curvature="0"
-       transform="translate(0,924.36218)"
-       sodipodi:nodetypes="cssscscc" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 39.821429,56.035714 47.142857,1.607143"
-       id="path4852"
-       inkscape:connector-curvature="0"
-       transform="translate(0,924.36218)" />
+    <g
+       id="g2988"
+       transform="matrix(1.2421297,0,0,1.2421297,-13.904661,-227.1538)">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4846"
+         d="m 31.504569,979.22389 6.245258,34.49081 50.245947,0 14.051826,-34.49081"
+         style="fill:#646464;fill-opacity:1;stroke:#000000;stroke-width:0.79485112px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cssscscc"
+         transform="translate(0,924.36218)"
+         inkscape:connector-curvature="0"
+         id="path4850"
+         d="m 40.535714,56.214286 c 0,0 -34.9999997,0.714285 -26.785714,-14.285715 8.214286,-15 10.178571,-18.392857 21.964286,-20.178571 C 47.5,19.964285 63.035714,16.392857 63.392857,26.035714 63.75,35.678571 63.75,31.214286 63.75,31.214286 c 0,0 3.928572,-23.3928577 22.321429,-15.178572 18.392861,8.214286 27.142861,36.607143 27.142861,36.607143 0,0 -8.03572,9.821428 -26.785718,4.821429"
+         style="fill:#c8c8c8;fill-opacity:1;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         transform="translate(0,924.36218)"
+         inkscape:connector-curvature="0"
+         id="path4852"
+         d="m 39.821429,56.035714 47.142857,1.607143"
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
   </g>
 </svg>

@@ -16,7 +16,10 @@
    id="svg3780"
    version="1.1"
    inkscape:version="0.48.1 "
-   sodipodi:docname="biscuit.svg">
+   sodipodi:docname="lump.svg"
+   inkscape:export-filename="C:\Users\Eric\Documents\Aptana Studio 3 Workspace\jsrogue\assets\images\sprites\items\lump.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs3782">
     <linearGradient
@@ -73,10 +76,9 @@
      id="layer1"
      transform="translate(0,-924.36218)">
     <path
-       style="fill:#646464;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
-       d="M 54.821429,82.642857 C 35.714286,92.107143 5.8928571,79.071429 11.428571,55.142857 16.964286,31.214286 41.964286,35.857143 47.5,42.821429 53.035714,49.785714 46.428571,26.928571 64.642857,29.25 82.857143,31.571429 103.57143,39.785714 93.75,52.464286 c -9.821429,12.678571 28.75,14.464285 16.96429,26.25 C 98.928571,90.5 67.321429,88.892857 68.035714,74.607143 68.75,60.321429 54.821429,82.642857 54.821429,82.642857 z"
+       style="fill:#646464;fill-opacity:1;stroke:#000000;stroke-width:1.22835517px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 55.712794,1011.2575 c -23.47036,11.6255 -60.1016677,-4.387 -53.3018446,-33.77977 6.7998245,-29.39279 37.5087056,-23.68971 44.3085286,-15.13509 6.799823,8.55462 -1.316096,-19.52208 21.057518,-16.67053 22.373614,2.85154 47.818124,12.9416 35.753914,28.51538 -12.064206,15.5738 35.31521,17.76729 20.83817,32.24431 -14.47705,14.4771 -53.301846,12.5029 -52.42445,-5.045 0.877397,-17.54794 -16.231836,9.8707 -16.231836,9.8707 z"
        id="path2988"
-       inkscape:connector-curvature="0"
-       transform="translate(0,924.36218)" />
+       inkscape:connector-curvature="0" />
   </g>
 </svg>

@@ -16,7 +16,10 @@
    id="svg3780"
    version="1.1"
    inkscape:version="0.48.1 "
-   sodipodi:docname="biscuit.svg">
+   sodipodi:docname="mace.svg"
+   inkscape:export-filename="C:\Users\Eric\Documents\Aptana Studio 3 Workspace\jsrogue\assets\images\sprites\items\mace.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs3782">
     <linearGradient
@@ -73,7 +76,8 @@
      id="layer1"
      transform="translate(0,-924.36218)">
     <g
-       id="g5244">
+       id="g5244"
+       transform="matrix(1.1126497,0,0,1.1126497,-8.1808219,-110.26017)">
       <path
          inkscape:connector-curvature="0"
          id="path4858"
@@ -169,7 +173,7 @@
          style="fill:#646464;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <path
          transform="matrix(0.72278757,0.69107027,-0.69107027,0.72278757,59.127439,911.39305)"
-         d="m 75.714287,16.125 a 19.375,19.375 0 1 1 -38.75,0 19.375,19.375 0 1 1 38.75,0 z"
+         d="m 75.714287,16.125 c 0,10.700517 -8.674483,19.375 -19.375,19.375 -10.700517,0 -19.375,-8.674483 -19.375,-19.375 0,-10.700517 8.674483,-19.375 19.375,-19.375 10.700517,0 19.375,8.674483 19.375,19.375 z"
          sodipodi:ry="19.375"
          sodipodi:rx="19.375"
          sodipodi:cy="16.125"
@@ -179,7 +183,7 @@
          sodipodi:type="arc" />
       <path
          transform="translate(-0.89285713,923.11218)"
-         d="m 93.392854,38.625 a 3.6607144,3.6607144 0 1 1 -7.321429,0 3.6607144,3.6607144 0 1 1 7.321429,0 z"
+         d="m 93.392854,38.625 c 0,2.021757 -1.638958,3.660714 -3.660714,3.660714 -2.021757,0 -3.660715,-1.638957 -3.660715,-3.660714 0,-2.021757 1.638958,-3.660714 3.660715,-3.660714 2.021756,0 3.660714,1.638957 3.660714,3.660714 z"
          sodipodi:ry="3.6607144"
          sodipodi:rx="3.6607144"
          sodipodi:cy="38.625"

@@ -16,7 +16,7 @@
    id="svg3780"
    version="1.1"
    inkscape:version="0.48.1 "
-   sodipodi:docname="sword.svg">
+   sodipodi:docname="shield.svg">
   <defs
      id="defs3782">
     <linearGradient
@@ -73,7 +73,10 @@
      id="layer1"
      transform="translate(0,-924.36218)">
     <g
-       id="g4840">
+       id="g4840"
+       transform="matrix(1.0568196,0,0,1.0568196,-6.0830384,-54.65864)"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
       <path
          sodipodi:nodetypes="cccccc"
          inkscape:connector-curvature="0"

@@ -128,7 +128,7 @@ levelmaker.generateLevel = function (depth) {
 
 }
 
-levelmaker.generateBlankLevel = function() {
+levelmaker.generateBlankLevel = function(depth) {
 	
 	var tiles = [];
 	
@@ -146,6 +146,8 @@ levelmaker.generateBlankLevel = function() {
 	for(walkers=0; walkers<5; walkers++) {
 		levelmaker.DiggerWalker(tiles, (mapWidth/2), (mapHeight/2), 1000);
 	}
+	
+	levelmaker.sprinkleItems(tiles, depth);
 	
 	return tiles;
 }
