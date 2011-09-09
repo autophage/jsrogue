@@ -143,35 +143,72 @@ levelmaker.generateBlankLevel = function() {
 		}
 	}
 	
-	levelmaker.digInitialRoom(tiles);
-	
-	/*
-	 *  So I think here the thing to do is:
-	 * 		Get an array of all tiles that are passable.
-	 * 		Pick a random member of that array.
-	 * 		Create a corridor from that tile to somewhere else.
-	 * 		Dig a new room with the center at the end of that corridor.
-	 * 	Then repeat that.
-	 * 
-	 * Do this a number of times... maybe a random number of times between 10 and 40?
-	 * 
-	 */
+	for(walkers=0; walkers<5; walkers++) {
+		levelmaker.DiggerWalker(tiles, (mapWidth/2), (mapHeight/2), 1000);
+	}
 	
 	return tiles;
 }
 
 levelmaker.digInitialRoom = function(tiles) {
-	levelmaker.dig(tiles,
+	levelmaker.digSquareRoom(tiles,
 		(mapWidth/2)-Math.floor(Math.random()*9),
 		(mapHeight/2)-Math.floor(Math.random()*9),
 		Math.floor(Math.random()*9)+3,
 		Math.floor(Math.random()*9)+3);
 }
 
-levelmaker.dig = function(level, x, y, width, height) {
+levelmaker.digSquareRoom = function(level, x, y, width, height) {
 	for(ix=0; ix<width; ix++) {
 		for(iy=0; iy<height; iy++) {
 			level[ix+x][iy+y].isPassable = true;
 		}
 	}
+}
+
+levelmaker.digSpace = function(level, x, y) {
+	level[x][y].isPassable = true;
+}
+
+levelmaker.DiggerWalker = function(level, startX, startY, moves) {
+	var x = startX;
+	var y = startY;
+	
+	for(i=0; i<moves; i++) {
+		levelmaker.digSpace(level, x, y);
+		var directionToMove = Math.floor(Math.random()*5);
+		switch(directionToMove) {
+			case 0:
+				break;
+			case 1:
+				x += 1;
+				break;
+			case 2:
+				y += 1;
+				break;
+			case 3:
+				x -= 1;
+				break;
+			case 4:
+				y -= 1;
+				break;
+		}
+		
+		if(x<2) {
+			x += 1;
+		}
+		
+		if(y<2) {
+			y+= 1;
+		}
+		
+		if((x+2)>mapWidth) {
+			x -= 1;
+		}
+		
+		if((y+2)>mapHeight) {
+			y -= 1;
+		}
+	}
+	
 }
