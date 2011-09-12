@@ -117,32 +117,64 @@ function Player() {
 				case WAIT:
 					break;
 				case NORTH:
-					this.position.y -= 1;
+					if(utils.moveIsValid(currentLevel, x, y-1)) {
+						this.position.y -= 1;
+					} else {
+						console.log("Invalid move.  Perhaps you want to dig?");
+					}
 					break;
 				case NORTHEAST:
-					this.position.x += 1;
-					this.position.y -= 1;
+					if(utils.moveIsValid(currentLevel, x+1, y-1)) {
+						this.position.x += 1;
+						this.position.y -= 1;
+					} else {
+						console.log("Invalid move.  Perhaps you want to dig?");
+					}
 					break;
 				case EAST:
-					this.position.x += 1;
+					if(utils.moveIsValid(currentLevel, x+1, y)) {
+						this.position.x += 1;
+					} else {
+						console.log("Invalid move.  Perhaps you want to dig?");
+					}
 					break;
 				case SOUTHEAST:
-					this.position.x += 1;
-					this.position.y += 1;
+					if(utils.moveIsValid(currentLevel, x+1, y+1)) {
+						this.position.x += 1;
+						this.position.y += 1;
+					} else {
+						console.log("Invalid move.  Perhaps you want to dig?");
+					}
 					break;
 				case SOUTH:
-					this.position.y += 1;
+					if(utils.moveIsValid(currentLevel, x, y+1)) {
+						this.position.y += 1;
+					} else {
+						console.log("Invalid move.  Perhaps you want to dig?");
+					}
 					break;
 				case SOUTHWEST:
-					this.position.y += 1;
-					this.position.x -= 1;
+					if(utils.moveIsValid(currentLevel, x-1, y+1)) {
+						this.position.y += 1;
+						this.position.x -= 1;
+					} else {
+						console.log("Invalid move.  Perhaps you want to dig?");
+					}
 					break;
 				case WEST:
-					this.position.x -= 1;
+					if(utils.moveIsValid(currentLevel, x-1, y)) {
+						this.position.x -= 1;
+					} else {
+						console.log("Invalid move.  Perhaps you want to dig?");
+					}
 					break;
 				case NORTHWEST:
-					this.position.x -= 1;
-					this.position.y -= 1;
+					if(utils.moveIsValid(currentLevel, x-1, y-1)) {
+						this.position.x -= 1;
+						this.position.y -= 1;
+					} else {
+						console.log("Invalid move.  Perhaps you want to dig?");
+					}
 					break;
 			}
 			

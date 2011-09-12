@@ -13,8 +13,8 @@ utils.pickADirectionAtRandom = function() {
 	return direction;
 };
 
-utils.isLocationAWall = function(x, y, level) {
-	if(level[x][y].occupants[0] == items.scenery[1]) {
+utils.moveIsValid = function(level, x, y) {
+	if(level[x][y].isPassable == true) {
 		return true;
 	} else {
 		return false;
