@@ -27,3 +27,20 @@ utils.getTileOccupants = function(level, x, y) {
 	var occupantsString = ""+level[xTileCoord][yTileCoord].occupants;
 	return occupantsString;
 }
+
+utils.getRandomEmptySpace = function(level) {
+	var gotValidReturnStatus = false;
+	var x=-1;
+	var y=-1;
+	while(!gotValidReturnStatus) {
+		x = Math.floor(Math.random()*mapWidth);
+		y = Math.floor(Math.random()*mapHeight);
+		if(level[x][y].isPassable == true) {
+			gotValidReturnStatus = true;
+		}
+	}
+	return {
+		x: x,
+		y: y
+	}
+}

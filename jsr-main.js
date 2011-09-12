@@ -17,8 +17,6 @@ function initGame() {
 	currentLevel = levelmaker.generateBlankLevel(20);
 	turn = 0;
 	
-	levelpainter.paint(currentLevel);
-	
 	// TODO on mouse enters map area, register this
 //	$("canvas#levelmap").mousemove(function(e){
 //      var clientCoords = "( " + e.clientX + ", " + e.clientY + " )";
@@ -28,7 +26,12 @@ function initGame() {
 //	});
 
 	player = Player();
-	player.setInitialPosition(15, 15, currentLevel);
+	
+	var playerStartCoords = utils.getRandomEmptySpace(currentLevel);
+	
+	player.setInitialPosition(playerStartCoords.x, playerStartCoords.y, currentLevel);
+	
+	levelpainter.paint(currentLevel);
     
     $('canvas#levelmap').attr("tabindex", "0").keydown(function(e) {
     	e.preventDefault();
