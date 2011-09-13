@@ -111,7 +111,7 @@ function Player() {
 					if(utils.moveIsValid(currentLevel, x, y-1)) {
 						this.position.y -= 1;
 					} else {
-						console.log("Invalid move.  Perhaps you want to dig?");
+						console.log("Invalid move.  Perhaps you want to (D)ig??");
 					}
 					break;
 				case NORTHEAST:
@@ -119,14 +119,14 @@ function Player() {
 						this.position.x += 1;
 						this.position.y -= 1;
 					} else {
-						console.log("Invalid move.  Perhaps you want to dig?");
+						console.log("Invalid move.  Perhaps you want to (D)ig??");
 					}
 					break;
 				case EAST:
 					if(utils.moveIsValid(currentLevel, x+1, y)) {
 						this.position.x += 1;
 					} else {
-						console.log("Invalid move.  Perhaps you want to dig?");
+						console.log("Invalid move.  Perhaps you want to (D)ig??");
 					}
 					break;
 				case SOUTHEAST:
@@ -134,14 +134,14 @@ function Player() {
 						this.position.x += 1;
 						this.position.y += 1;
 					} else {
-						console.log("Invalid move.  Perhaps you want to dig?");
+						console.log("Invalid move.  Perhaps you want to (D)ig??");
 					}
 					break;
 				case SOUTH:
 					if(utils.moveIsValid(currentLevel, x, y+1)) {
 						this.position.y += 1;
 					} else {
-						console.log("Invalid move.  Perhaps you want to dig?");
+						console.log("Invalid move.  Perhaps you want to (D)ig??");
 					}
 					break;
 				case SOUTHWEST:
@@ -149,14 +149,14 @@ function Player() {
 						this.position.y += 1;
 						this.position.x -= 1;
 					} else {
-						console.log("Invalid move.  Perhaps you want to dig?");
+						console.log("Invalid move.  Perhaps you want to (D)ig??");
 					}
 					break;
 				case WEST:
 					if(utils.moveIsValid(currentLevel, x-1, y)) {
 						this.position.x -= 1;
 					} else {
-						console.log("Invalid move.  Perhaps you want to dig?");
+						console.log("Invalid move.  Perhaps you want to (D)ig??");
 					}
 					break;
 				case NORTHWEST:
@@ -164,7 +164,7 @@ function Player() {
 						this.position.x -= 1;
 						this.position.y -= 1;
 					} else {
-						console.log("Invalid move.  Perhaps you want to dig?");
+						console.log("Invalid move.  Perhaps you want to (D)ig??");
 					}
 					break;
 			}

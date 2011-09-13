@@ -68,6 +68,9 @@ function initGame() {
     		case 12:
     			player.move(WAIT, currentLevel);
     			break;
+    		case 68:
+    			console.log("You pressed 'd', for Dig!  Digging is not implemented yet.");
+    			break;
     		default:
     			console.log('  -- Not a valid keypress.  Ignoring it. --');
     	}
