@@ -18,12 +18,18 @@ function initGame() {
 	turn = 0;
 	
 	// TODO on mouse enters map area, register this
-//	$("canvas#levelmap").mousemove(function(e){
-//      var clientCoords = "( " + e.clientX + ", " + e.clientY + " )";
-//     $("div#tiledescription").text("( e.pageX, e.pageY ) - " + pageCoords + "\n" + "( e.clientX, e.clientY ) - " + clientCoords);
+	$("canvas#levelmap").mousemove(function(e){
+		var canvasOffset = $('canvas#levelmap').offset();
+		var offsetX = e.clientX-canvasOffset.left;
+		var offsetY = e.clientY-canvasOffset.top;
+		var canvasCoords = "( " + offsetX + ", " + offsetY + " )";
+		var xTile = Math.floor(offsetX/16);
+		var yTile = Math.floor(offsetY/16);
+		$("div#tiledescription").text(Math.floor(offsetX/16) + ", " + Math.floor(offsetY/16) + ": " + utils.getTileOccupants(currentLevel, xTile, yTile));
+		levelpainter.paint(currentLevel);
+		levelpainter.updateTile(currentLevel, xTile, yTile, true);
 //	$("div#tiledescription").text(utils.getTileOccupants(currentLevel, e.clientX, e.clientY));
-//	levelpainter.placeRect(currentLevel, e.clientX, e.clientY);
-//	});
+	});
 
 	player = Player();
 	

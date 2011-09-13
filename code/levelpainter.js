@@ -9,7 +9,7 @@ levelpainter.paint = function(level) {
 	}
 }
 
-levelpainter.updateTile = function(level, x, y) {
+levelpainter.updateTile = function(level, x, y, isHighlighted) {
 	var ctx = document.getElementById('levelmap').getContext('2d');
 	
 	if(level[x][y].isPassable == false) {
@@ -27,11 +27,17 @@ levelpainter.updateTile = function(level, x, y) {
 			ctx.drawImage(toDraw, level[x][y].xPos*16, level[x][y].yPos*16, 16, 16);
 		}
 	}
+	
+	if(isHighlighted) {
+		ctx.fillStyle = "rgba(250, 225, 200, 0.5)";
+		ctx.fillRect(level[x][y].xPos*16, level[x][y].yPos*16, 16, 16);
+	}
 }
 
 levelpainter.placeRect = function(level, x, y) {
 	var ctx = document.getElementById('levelmap').getContext('2d');
-	ctx.clearRect(level[x][y].xPos*16, level[x][y].yPos*16, 16, 16);
+	ctx.fillStyle = "rgba(250, 225, 200, 0.5)";
+	ctx.fillRect(level[x][y].xPos*16, level[x][y].yPos*16, 16, 16);
 }
 
 levelpainter.clearScreen = function() {

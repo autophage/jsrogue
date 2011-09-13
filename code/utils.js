@@ -22,9 +22,17 @@ utils.moveIsValid = function(level, x, y) {
 };
 
 utils.getTileOccupants = function(level, x, y) {
-	var xTileCoord = Math.floor(x / 16);
-	var yTileCoord = Math.floor(y / 16);
-	var occupantsString = ""+level[xTileCoord][yTileCoord].occupants;
+	var occupantsString = '';
+	if(level[x][y].isPassable==false) {
+		occupantsString = "Rock.";
+	} else if(level[x][y].occupants.length == 0) {
+		occupantsString = "Empty space";
+	} else {
+		occupantsString = "a ";
+		for(var i in level[x][y].occupants) {
+			occupantsString += level[x][y].occupants[i].material.name + " " + level[x][y].occupants[i].name + ", ";
+		}
+	}
 	return occupantsString;
 }
 
