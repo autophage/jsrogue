@@ -31,23 +31,14 @@ function CreatureProto() {
 		eachTurn: function(level) {
 			var x = this.position.x;
 			var y = this.position.y;
-			var oldScenery = level[x][y].occupants[0];
-			level[x][y].occupants.pop();
-			level[x][y].occupants[0] = oldScenery;
 			var shiftX = Math.floor(Math.random() * 3) - 1;
 			var shiftY = Math.floor(Math.random() * 3) - 1;
-			var testPosition = {};
-			testPosition.x = this.position.x + shiftX;
-			testPosition.y = this.position.y + shiftY;
-			if(level[testPosition.x][testPosition.y].occupants[0] != items.scenery[1]) {
-				this.position.x += shiftX;
-				this.position.y += shiftY;
-				var x = this.position.x;
-				var y = this.position.y;
-				level[x][y].occupants.push(this);
-				console.log(this.article + ' ' + this.name + ' is now located at ' + this.position.x + ', ' + this.position.y + '.');
+			if(utils.moveIsValid(currentLevel, x+shiftX, y+shiftY)) {
+				level[x][y].occupants.pop();
+				level[x+shiftX][y+shiftY].occupants.push(this);
+				this.position.x = x+shiftX;
+				this.position.y = y+shiftY;
 			}
-			level[this.position.x][this.position.y].occupants.push(this);
 		}
 	}
 }

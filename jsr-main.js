@@ -17,7 +17,6 @@ function initGame() {
 	currentLevel = levelmaker.generateBlankLevel(20);
 	turn = 0;
 	
-	// TODO on mouse enters map area, register this
 	$("canvas#levelmap").mousemove(function(e){
 		var canvasOffset = $('canvas#levelmap').offset();
 		var offsetX = e.clientX-canvasOffset.left;
@@ -28,7 +27,6 @@ function initGame() {
 		$("div#tiledescription").text(Math.floor(offsetX/16) + ", " + Math.floor(offsetY/16) + ": " + utils.getTileOccupants(currentLevel, xTile, yTile));
 		levelpainter.paint(currentLevel);
 		levelpainter.updateTile(currentLevel, xTile, yTile, true);
-//	$("div#tiledescription").text(utils.getTileOccupants(currentLevel, e.clientX, e.clientY));
 	});
 
 	player = Player();
@@ -92,11 +90,8 @@ function doATurn() {
 
 function addACreature(x, y, level) {
 	var toAdd = new CreatureProto();
-	if(level[x][y].occupants[0] == items.scenery[1]) {
-		console.log('Cannot put a creature at ' + x + ', ' + y + '.  There is a wall in the way.');
-		return;
-	}
-	toAdd.setInitialPosition(x, y, level);
+	var position = utils.getRandomEmptySpace(currentLevel);
+	toAdd.setInitialPosition(position.x, position.y, level);
 	level.actors.push(toAdd);
 }
 

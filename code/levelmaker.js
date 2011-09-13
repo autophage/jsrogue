@@ -149,6 +149,8 @@ levelmaker.generateBlankLevel = function(depth) {
 	
 	levelmaker.sprinkleItems(tiles, depth);
 	
+	tiles.actors = levelmaker.actors;
+	
 	return tiles;
 }
 
