@@ -3,6 +3,8 @@ function CreatureProto() {
 		article: "a",
 		name: "Primordial Creature",
 		image: "./assets/images/sprites/creatures/primordial_creature.png",
+		behaviorCounter: 0,
+		currentBehavior: 1,
 		limbs: {
 			body: {
 				maxHits: 10,
@@ -29,16 +31,70 @@ function CreatureProto() {
 		},
 		
 		eachTurn: function(level) {
+			
+			this.shiftX = 0;
+			this.shiftY = 0;
+
+			if(this.behaviorCounter == 0) {
+				this.currentBehavior = Math.floor(Math.random()*3);
+				this.behaviorCounter = Math.floor(Math.random()*15);
+			}
+			
 			var x = this.position.x;
 			var y = this.position.y;
-			var shiftX = Math.floor(Math.random() * 3) - 1;
-			var shiftY = Math.floor(Math.random() * 3) - 1;
-			if(utils.moveIsValid(currentLevel, x+shiftX, y+shiftY)) {
-				level[x][y].occupants.pop();
-				level[x+shiftX][y+shiftY].occupants.push(this);
-				this.position.x = x+shiftX;
-				this.position.y = y+shiftY;
+			
+			if(this.currentBehavior == 0) {
+				console.log('chasing player!');
+				if(player.position.x < x) {
+					this.shiftX = -1;
+				} else if(player.position.x > x) {
+					this.shiftX = 1;
+				} else {
+					this.shiftX = 0;
+				}
+				
+				if(player.position.y < y) {
+					this.shiftY = -1;
+				} else if(player.position.y > y) {
+					this.shiftY = 1;
+				} else {
+					this.shiftY = 0;
+				}
 			}
+			
+			if(this.currentBehavior == 1) {
+				console.log('moving at random!');
+				this.shiftX = Math.floor(Math.random() * 3) - 1;
+				this.shiftY = Math.floor(Math.random() * 3) - 1;
+			}
+	
+			if(this.currentBehavior == 2) {
+				console.log('running from player!');
+				if(player.position.x > x) {
+						this.shiftX = -1;
+					} else if(player.position.x < x) {
+						this.shiftX = 1;
+					} else {
+						this.shiftX = 0;
+					}
+					
+				if(player.position.y > y) {
+						this.shiftY = -1;
+					} else if(player.position.y < y) {
+						this.shiftY = 1;
+					} else {
+						this.shiftY = 0;
+					}
+			}
+			
+			if(utils.moveIsValid(currentLevel, x+this.shiftX, y+this.shiftY)) {
+				level[x][y].occupants.pop();
+				level[x+this.shiftX][y+this.shiftY].occupants.push(this);
+				this.position.x = x+this.shiftX;
+				this.position.y = y+this.shiftY;
+			}
+			
+			this.behaviorCounter--;
 		}
 	}
 }
