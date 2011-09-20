@@ -62,14 +62,20 @@ utils.drawTextWindow = function(string, color, textColor) {
 	ctx.fillStyle = color;
 	ctx.fillRect(40, 40, 880, 400);
 	
-	//TODO: Fix off-by-one error or whatever the hell is going on here.
-	//TODO: Make it so that IF string.charAt(i) is a newline, we just skip down to the next choppedString array element.
+	//TODO: Gracefully handle word breaks, so that if the end of a line happens mid-word the whole word gets shoved onto the next line
 	var choppedString = [""];
 	var currentIndex = -1;
 	for(i=0; i<string.length; i++) {
+		
+		if(string.charAt(i)=="\n") {
+				currentIndex++;
+				choppedString.push("");
+				i++;
+		}
+		
 		if(i%76==0) {
 			currentIndex++;
-			choppedString[currentIndex] = "";
+			choppedString.push("");
 		}
 		choppedString[currentIndex] += string.charAt(i);
 	}
@@ -80,6 +86,7 @@ utils.drawTextWindow = function(string, color, textColor) {
 	var verticalPosition = 68;
 	var eachLineDown = 20;
 	for(i=0; i<choppedString.length; i++) {
+		console.log(choppedString[i]);
 		ctx.fillText(choppedString[i], 60, verticalPosition);
 		verticalPosition += eachLineDown;
 	}
