@@ -65,13 +65,13 @@ utils.drawTextWindow = function(string, color, textColor) {
 	//TODO: Fix off-by-one error or whatever the hell is going on here.
 	//TODO: Make it so that IF string.charAt(i) is a newline, we just skip down to the next choppedString array element.
 	var choppedString = [""];
-	var currentIndex = 0;
+	var currentIndex = -1;
 	for(i=0; i<string.length; i++) {
-		choppedString[currentIndex] += string.charAt(i);
 		if(i%76==0) {
 			currentIndex++;
 			choppedString[currentIndex] = "";
 		}
+		choppedString[currentIndex] += string.charAt(i);
 	}
 		
 	// Draw the text
