@@ -52,3 +52,37 @@ utils.getRandomEmptySpace = function(level) {
 		y: y
 	}
 }
+
+utils.drawTextWindow = function(string, color, textColor) {
+	
+	IN_TEXT_WINDOW = true;
+	var ctx = document.getElementById('levelmap').getContext('2d');
+	
+	// Draw the background
+	ctx.fillStyle = color;
+	ctx.fillRect(40, 40, 880, 400);
+	
+	//TODO: Fix off-by-one error or whatever the hell is going on here.
+	//TODO: Make it so that IF string.charAt(i) is a newline, we just skip down to the next choppedString array element.
+	var choppedString = [""];
+	var currentIndex = 0;
+	for(i=0; i<string.length; i++) {
+		choppedString[currentIndex] += string.charAt(i);
+		if(i%76==0) {
+			currentIndex++;
+			choppedString[currentIndex] = "";
+		}
+	}
+		
+	// Draw the text
+	ctx.font = "bold 18px monospace";
+	ctx.fillStyle = textColor;
+	var verticalPosition = 68;
+	var eachLineDown = 20;
+	for(i=0; i<choppedString.length; i++) {
+		ctx.fillText(choppedString[i], 60, verticalPosition);
+		verticalPosition += eachLineDown;
+	}
+	// So that the user knows how to get the hell out of there
+	ctx.fillText("Press any key to continue...", 330, 430);
+}

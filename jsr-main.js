@@ -2,6 +2,8 @@ var mapWidth = 60;
 var mapHeight = 30;
 var GAME_IN_PROGRESS = false;
 
+var IN_TEXT_WINDOW = false;
+
 var WAIT = 0;
 var NORTH = 1;
 var NORTHEAST = 2;
@@ -18,15 +20,17 @@ function initGame() {
 	turn = 0;
 	
 	$("canvas#levelmap").mousemove(function(e){
-		var canvasOffset = $('canvas#levelmap').offset();
-		var offsetX = e.clientX-canvasOffset.left;
-		var offsetY = e.clientY-canvasOffset.top;
-		var canvasCoords = "( " + offsetX + ", " + offsetY + " )";
-		var xTile = Math.floor(offsetX/16);
-		var yTile = Math.floor(offsetY/16);
-		$("div#tiledescription").text(Math.floor(offsetX/16) + ", " + Math.floor(offsetY/16) + ": " + utils.getTileOccupants(currentLevel, xTile, yTile));
-		levelpainter.paint(currentLevel);
-		levelpainter.updateTile(currentLevel, xTile, yTile, true);
+		if(!IN_TEXT_WINDOW) {
+			var canvasOffset = $('canvas#levelmap').offset();
+			var offsetX = e.clientX-canvasOffset.left;
+			var offsetY = e.clientY-canvasOffset.top;
+			var canvasCoords = "( " + offsetX + ", " + offsetY + " )";
+			var xTile = Math.floor(offsetX/16);
+			var yTile = Math.floor(offsetY/16);
+			$("div#tiledescription").text(Math.floor(offsetX/16) + ", " + Math.floor(offsetY/16) + ": " + utils.getTileOccupants(currentLevel, xTile, yTile));
+			levelpainter.paint(currentLevel);
+			levelpainter.updateTile(currentLevel, xTile, yTile, true);
+		}
 	});
 
 	player = Player();
@@ -40,6 +44,12 @@ function initGame() {
     $('canvas#levelmap').attr("tabindex", "0").keydown(function(e) {
     	e.preventDefault();
     	console.log(' - key ' + e.which + ' was pressed.');
+    	if(IN_TEXT_WINDOW) {
+    		IN_TEXT_WINDOW = false;
+    		levelpainter.clearScreen();
+    		levelpainter.paint(currentLevel);
+    		return;
+    	}
     	switch(e.which) {
     		case 38:
     			player.move(NORTH, currentLevel);
