@@ -3,6 +3,9 @@ var mapHeight = 30;
 var GAME_IN_PROGRESS = false;
 
 var IN_TEXT_WINDOW = false;
+var IN_INVENTORY = false;
+
+var invHighlightCursor = 0;
 
 var WAIT = 0;
 var NORTH = 1;
@@ -20,7 +23,7 @@ function initGame() {
 	turn = 0;
 	
 	$("canvas#levelmap").mousemove(function(e){
-		if(!IN_TEXT_WINDOW) {
+		if(!IN_TEXT_WINDOW && !IN_INVENTORY) {
 			var canvasOffset = $('canvas#levelmap').offset();
 			var offsetX = e.clientX-canvasOffset.left;
 			var offsetY = e.clientY-canvasOffset.top;
@@ -48,6 +51,29 @@ function initGame() {
     		IN_TEXT_WINDOW = false;
     		levelpainter.clearScreen();
     		levelpainter.paint(currentLevel);
+    		return;
+    	}
+    	if(IN_INVENTORY) {
+    		switch(e.which) {
+    			case 27:
+    				IN_INVENTORY = false;
+    				levelpainter.clearScreen();
+    				levelpainter.paint(currentLevel);
+    				break;
+    			case 38:
+    				if(invHighlightCursor != 0) {
+	    				invHighlightCursor--;
+	    			}
+    				showInventory();
+    				break;
+    			case 40:
+    			//TODO: Change this so that it relates to player's inventory, I'm only using this value because I'm faking an inventory to test the screen
+    				if(invHighlightCursor != 4) {
+	    				invHighlightCursor++;
+	    			}
+    				showInventory();
+    				break;
+    		}
     		return;
     	}
     	switch(e.which) {
@@ -81,6 +107,10 @@ function initGame() {
     		case 68:
     			console.log("You pressed 'd', for Dig!  Digging is not implemented yet.");
     			break;
+    		case 73:
+    			invHighlightCursor = 0;
+    			showInventory();
+    			break;
     		default:
     			console.log('  -- Not a valid keypress.  Ignoring it. --');
     	}
@@ -97,8 +127,10 @@ function doATurn() {
 			alert(e);
 		}
 	}
-	levelpainter.clearScreen();
-	levelpainter.paint(currentLevel);
+	if(!IN_INVENTORY) {
+		levelpainter.clearScreen();
+		levelpainter.paint(currentLevel);
+	}
 }
 
 function addACreature(x, y, level) {
@@ -106,6 +138,57 @@ function addACreature(x, y, level) {
 	var position = utils.getRandomEmptySpace(currentLevel);
 	toAdd.setInitialPosition(position.x, position.y, level);
 	level.actors.push(toAdd);
+}
+
+function showInventory() {
+	IN_INVENTORY = true;
+	var testInventory = [];
+
+	for(i=0; i<5; i++) {
+		var itemToAdd = items.getRandomItem(1);
+		testInventory.push(itemToAdd);
+	}
+	
+	drawInventoryScreen(testInventory);
+		
+}
+
+function drawInventoryScreen(array) {
+
+	var ctx = document.getElementById('levelmap').getContext('2d');
+	ctx.font = "bold 18px monospace";
+	
+	// Draw the background
+	ctx.fillStyle = 'rgba(50, 42, 25, 1)';
+	ctx.fillRect(40, 40, 880, 400);
+
+	var drawInventoryEntry = function(item, index, isHighlighted) {
+		if(isHighlighted) {
+			ctx.fillStyle = 'rgba(100, 85, 50, 1)';
+		} else {
+			ctx.fillStyle = 'rgba(100, 85, 50, .6)';
+		}
+		ctx.fillRect(80, 60+40*index, 800, 30);
+		
+		if(isHighlighted) {
+			ctx.fillStyle = 'rgba(200, 200, 200, 1)';
+		} else {
+			ctx.fillStyle = 'rgba(200, 200, 200, .6)';
+		}
+		ctx.fillText(item.article + " " + item.name, 90, 80+40*index);
+	}
+	
+		for(i=0; i<array.length; i++) {
+		if(i==invHighlightCursor) {
+			drawInventoryEntry(array[i], i, true);
+		} else {
+			drawInventoryEntry(array[i], i, false);
+		}
+	}
+
+	ctx.fillStyle = 'rgba(200, 200, 200, 1)';
+	ctx.fillText("Press escape to return to game...", 330, 430);
+	
 }
 
 window.addEventListener("load", initGame, false);

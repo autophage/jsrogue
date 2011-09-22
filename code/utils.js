@@ -53,13 +53,13 @@ utils.getRandomEmptySpace = function(level) {
 	}
 }
 
-utils.drawTextWindow = function(string, color, textColor) {
+utils.drawTextWindow = function(string) {
 	
 	IN_TEXT_WINDOW = true;
 	var ctx = document.getElementById('levelmap').getContext('2d');
 	
 	// Draw the background
-	ctx.fillStyle = color;
+	ctx.fillStyle = 'rgba(50, 42, 25, 1)';
 	ctx.fillRect(40, 40, 880, 400);
 	
 	//TODO: Gracefully handle word breaks, so that if the end of a line happens mid-word the whole word gets shoved onto the next line
@@ -82,7 +82,7 @@ utils.drawTextWindow = function(string, color, textColor) {
 		
 	// Draw the text
 	ctx.font = "bold 18px monospace";
-	ctx.fillStyle = textColor;
+	ctx.fillStyle = 'rgba(200, 200, 200, 1)';
 	var verticalPosition = 68;
 	var eachLineDown = 20;
 	for(i=0; i<choppedString.length; i++) {
