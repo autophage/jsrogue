@@ -6,6 +6,8 @@ var IN_TEXT_WINDOW = false;
 var IN_INVENTORY = false;
 
 var invHighlightCursor = 0;
+var invCursor = 0;
+var invCurLowerBound = 0;
 
 var WAIT = 0;
 var NORTH = 1;
@@ -67,15 +69,14 @@ function initGame() {
     				levelpainter.paint(currentLevel);
     				break;
     			case 38:
-    				if(invHighlightCursor != 0) {
-	    				invHighlightCursor--;
+    				if(invCursor != 0) {
+	    				invCursor--;
 	    			}
     				showInventory();
     				break;
     			case 40:
-    			//TODO: Change this so that it relates to player's inventory, I'm only using this value because I'm faking an inventory to test the screen
-    				if(invHighlightCursor != 4) {
-	    				invHighlightCursor++;
+    				if(invCursor != player.inventory.length-1) {
+	    				invCursor++;
 	    			}
     				showInventory();
     				break;
@@ -150,9 +151,27 @@ function addACreature(x, y, level) {
 
 function showInventory() {
 	IN_INVENTORY = true;
-	
-	drawInventoryScreen(player.inventory);
+	if(player.inventory.length<9) {
+		invHighlightCursor = invCursor;
+		drawInventoryScreen(player.inventory);
+	} else {
+		var subsetToDraw = [];
 		
+		if(invCursor<9) {
+			invHighlightCursor = invCursor;
+			for(i=0; i<9; i++) {
+				subsetToDraw[i] = player.inventory[i];
+			}
+		} else {
+			invCurLowerBound = invCursor;
+			invHighlightCursor = 8;
+			for(i=1; i<10; i++) {
+				subsetToDraw.push(player.inventory[i + invCurLowerBound-9]);
+			}
+		}
+		
+		drawInventoryScreen(subsetToDraw);
+	}
 }
 
 function drawInventoryScreen(array) {
@@ -180,7 +199,7 @@ function drawInventoryScreen(array) {
 		ctx.fillText(item.article + " " + item.material.name + " " + item.name, 90, 80+40*index);
 	}
 	
-		for(i=0; i<array.length; i++) {
+	for(i=0; i<array.length; i++) {
 		if(i==invHighlightCursor) {
 			drawInventoryEntry(array[i], i, true);
 		} else {

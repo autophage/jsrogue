@@ -95,7 +95,7 @@ utils.drawTextWindow = function(string) {
 }
 
 utils.getItems = function(actor, level, x, y) {
-	if(level[x][y].occupants.length!=0) {
+	if(level[x][y].occupants.length!=1) {
 		for(n in level[x][y].occupants) {
 			if(level[x][y].occupants[n]!=actor) {
 				var toGive = level[x][y].occupants[n];
@@ -103,6 +103,8 @@ utils.getItems = function(actor, level, x, y) {
 				actor.inventory.push(toGive);
 			}
 		}
+	} else {
+		console.log("Nothing to pick up.");
 	}
 	levelpainter.paint();
 }
