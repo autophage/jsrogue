@@ -93,3 +93,16 @@ utils.drawTextWindow = function(string) {
 	// So that the user knows how to get the hell out of there
 	ctx.fillText("Press any key to continue...", 330, 430);
 }
+
+utils.getItems = function(actor, level, x, y) {
+	if(level[x][y].occupants.length!=0) {
+		for(n in level[x][y].occupants) {
+			if(level[x][y].occupants[n]!=actor) {
+				var toGive = level[x][y].occupants[n];
+				level[x][y].occupants.splice(n);
+				actor.inventory.push(toGive);
+			}
+		}
+	}
+	levelpainter.paint();
+}

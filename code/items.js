@@ -71,6 +71,17 @@ var items = {
 			baseArmor: 0.2,
 			material: materials[0],
 			image: "./assets/images/sprites/items/lump.png"
+		},
+		
+		{
+			article: "a",
+			name: "pickaxe",
+			baseValue: 4.5,
+			baseWeight: 3,
+			baseDamage: 3,
+			baseArmor: 1,
+			material: materials[0],
+			image: "./assets/images/sprites/items/pickaxe.png"
 		}
 	],
 	

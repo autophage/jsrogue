@@ -38,6 +38,12 @@ function initGame() {
 
 	player = Player();
 	
+	player.inventory.push(items.list[6]);			// Give the player a pickaxe
+	player.inventory[0].material = materials[2];	// made of steel
+	
+	player.inventory.push(items.list[2]);			// Give the player a biscuit
+	player.inventory[1].material = materials[12];	// made of cheese
+	
 	var playerStartCoords = utils.getRandomEmptySpace(currentLevel);
 	
 	player.setInitialPosition(playerStartCoords.x, playerStartCoords.y, currentLevel);
@@ -111,6 +117,8 @@ function initGame() {
     			invHighlightCursor = 0;
     			showInventory();
     			break;
+    		case 71:
+    			utils.getItems(player, currentLevel, player.position.x, player.position.y);
     		default:
     			console.log('  -- Not a valid keypress.  Ignoring it. --');
     	}
@@ -142,14 +150,8 @@ function addACreature(x, y, level) {
 
 function showInventory() {
 	IN_INVENTORY = true;
-	var testInventory = [];
-
-	for(i=0; i<5; i++) {
-		var itemToAdd = items.getRandomItem(1);
-		testInventory.push(itemToAdd);
-	}
 	
-	drawInventoryScreen(testInventory);
+	drawInventoryScreen(player.inventory);
 		
 }
 
@@ -175,7 +177,7 @@ function drawInventoryScreen(array) {
 		} else {
 			ctx.fillStyle = 'rgba(200, 200, 200, .6)';
 		}
-		ctx.fillText(item.article + " " + item.name, 90, 80+40*index);
+		ctx.fillText(item.article + " " + item.material.name + " " + item.name, 90, 80+40*index);
 	}
 	
 		for(i=0; i<array.length; i++) {
