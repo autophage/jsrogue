@@ -87,6 +87,11 @@ function initGame() {
     				break;
     			case 85:
     				// User wants to use current item
+    				if(player.inventory[invCursor].canBeUsed) {
+	    				player.inventory[invCursor].use(player);
+	    			} else {
+	    				console.log("The " + player.inventory[invCursor].name + " cannot be used.");
+	    			}
     				break;
     			case 69:
     				// User wants to equip current item

@@ -44,6 +44,14 @@ var items = {
 			image: "./assets/images/sprites/items/biscuit.png",
 			canBeEquipped: false,
 			canBeUsed: true,
+			use: function(user) {
+				user.inventory.splice(utils.getIndexOf(user.inventory, this), 1);
+				if(user==player) {
+					console.log("You eat the biscuit.");
+					invCursor--;
+					showInventory();
+				}
+			},
 			isEquipped: false
 		},
 		
