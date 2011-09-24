@@ -11,7 +11,10 @@ var items = {
 			baseArmor: 2,
 			display: "#",
 			material: materials[0],
-			image: "./assets/images/sprites/items/sword.png"
+			image: "./assets/images/sprites/items/sword.png",
+			canBeEquipped: true,
+			canBeUsed: false,
+			isEquipped: false
 		},
 		
 		{
@@ -23,7 +26,10 @@ var items = {
 			baseArmor: 8,
 			display: "#",
 			material: materials[0],
-			image: "./assets/images/sprites/items/shield.png"
+			image: "./assets/images/sprites/items/shield.png",
+			canBeEquipped: true,
+			canBeUsed: false,
+			isEquipped: false
 		},
 		
 		{
@@ -35,7 +41,10 @@ var items = {
 			baseArmor: 0,
 			display: "%",
 			material: materials[0],
-			image: "./assets/images/sprites/items/biscuit.png"
+			image: "./assets/images/sprites/items/biscuit.png",
+			canBeEquipped: false,
+			canBeUsed: true,
+			isEquipped: false
 		},
 		
 		{
@@ -47,7 +56,10 @@ var items = {
 			baseArmor: .1,
 			display: "#",
 			material: materials[0],
-			image: "./assets/images/sprites/items/mace.png"
+			image: "./assets/images/sprites/items/mace.png",
+			canBeEquipped: true,
+			canBeUsed: false,
+			isEquipped: false
 		},
 		
 		{
@@ -59,7 +71,10 @@ var items = {
 			baseArmor: 5.5,
 			display: "#",
 			material: materials[0],
-			image: "./assets/images/sprites/items/buckler.png"
+			image: "./assets/images/sprites/items/buckler.png",
+			canBeEquipped: true,
+			canBeUsed: false,
+			isEquipped: false
 		},
 		
 		{
@@ -70,7 +85,10 @@ var items = {
 			baseDamage: 0.2,
 			baseArmor: 0.2,
 			material: materials[0],
-			image: "./assets/images/sprites/items/lump.png"
+			image: "./assets/images/sprites/items/lump.png",
+			canBeEquipped: false,
+			canBeUsed: false,
+			isEquipped: false
 		},
 		
 		{
@@ -81,7 +99,10 @@ var items = {
 			baseDamage: 3,
 			baseArmor: 1,
 			material: materials[0],
-			image: "./assets/images/sprites/items/pickaxe.png"
+			image: "./assets/images/sprites/items/pickaxe.png",
+			canBeEquipped: true,
+			canBeUsed: true,
+			isEquipped: false
 		}
 	],
 	

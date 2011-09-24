@@ -158,7 +158,9 @@ function Player() {
 			var x = this.position.x;
 			var y = this.position.y;
 			
-			level[x][y].occupants.pop();
+			var occupantIndex = utils.getIndexOf(level[x][y].occupants, player);
+			console.log("  occupantIndex of player was " + occupantIndex);
+			level[x][y].occupants.splice(occupantIndex, 1);
 			
 			switch(dir) {
 				case WAIT:
@@ -223,6 +225,12 @@ function Player() {
 						console.log("Invalid move.  Perhaps you want to (D)ig??");
 					}
 					break;
+			};
+			
+			this.dropItem = function(item) {
+				var itemBeingDropped = this.inventory[item];
+				this.inventory.splice(item, 1);
+				currentLevel[this.position.x][this.position.y].occupants.push(itemBeingDropped);
 			}
 			
 			var x = this.position.x;

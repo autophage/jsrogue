@@ -108,3 +108,12 @@ utils.getItems = function(actor, level, x, y) {
 	}
 	levelpainter.paint();
 }
+
+utils.getIndexOf = function(arr, item) {
+	for(i=0; i<arr.length; i++) {
+		if(arr[i] == item) {
+			return i;
+		}
+	}
+	return false;
+}

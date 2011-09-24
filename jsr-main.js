@@ -80,6 +80,17 @@ function initGame() {
 	    			}
     				showInventory();
     				break;
+    			case 68:
+    				// User wants to drop current item
+    				player.dropItem(invCursor);
+    				showInventory();
+    				break;
+    			case 85:
+    				// User wants to use current item
+    				break;
+    			case 69:
+    				// User wants to equip current item
+    				break;
     		}
     		return;
     	}
@@ -196,7 +207,20 @@ function drawInventoryScreen(array) {
 		} else {
 			ctx.fillStyle = 'rgba(200, 200, 200, .6)';
 		}
+		
+		if(item.isEquipped) {
+			ctx.fillText("Equipped", 400, 80+40*index);
+		}
+		
 		ctx.fillText(item.article + " " + item.material.name + " " + item.name, 90, 80+40*index);
+		var itemActions = "(d)rop";
+		if(item.canBeUsed) {
+			itemActions += ", (u)se";
+		}
+		if(item.canBeEquipped) {
+			itemActions += ", (e)quip";
+		}
+		ctx.fillText(itemActions, 620, 80+40*index);
 	}
 	
 	for(i=0; i<array.length; i++) {
