@@ -42,6 +42,7 @@ function initGame() {
 	
 	player.inventory.push(items.list[6]);			// Give the player a pickaxe
 	player.inventory[0].material = materials[2];	// made of steel
+	player.inventory[0].isEquipped = true;			// and equip it
 	
 	player.inventory.push(items.list[2]);			// Give the player a biscuit
 	player.inventory[1].material = materials[12];	// made of cheese
@@ -95,6 +96,16 @@ function initGame() {
     				break;
     			case 69:
     				// User wants to equip current item
+    				if(player.inventory[invCursor].canBeEquipped) {
+    					if(player.inventory[invCursor].isEquipped) {
+    						player.inventory[invCursor].isEquipped = false;
+    					} else {
+    						player.inventory[invCursor].isEquipped = true;
+    					}
+    					showInventory();
+    				} else {
+    					console.log("The " + player.inventory[invCursor].name + " cannot be equipped.");
+    				}
     				break;
     		}
     		return;
@@ -219,13 +230,16 @@ function drawInventoryScreen(array) {
 		
 		ctx.fillText(item.article + " " + item.material.name + " " + item.name, 90, 80+40*index);
 		var itemActions = "(d)rop";
+		var horizontalPosition = 800;
 		if(item.canBeUsed) {
 			itemActions += ", (u)se";
+			horizontalPosition -= 70;
 		}
 		if(item.canBeEquipped) {
 			itemActions += ", (e)quip";
+			horizontalPosition -= 100;
 		}
-		ctx.fillText(itemActions, 620, 80+40*index);
+		ctx.fillText(itemActions, horizontalPosition, 80+40*index);
 	}
 	
 	for(i=0; i<array.length; i++) {
