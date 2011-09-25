@@ -169,7 +169,11 @@ function Player() {
 					if(utils.moveIsValid(currentLevel, x, y-1)) {
 						this.position.y -= 1;
 					} else {
-						console.log("Invalid move.  Perhaps you want to (D)ig??");
+						if(DIGGING&&(y-1)>0) {
+							currentLevel[x][y-1].isPassable = true;
+							console.log("You dig.");
+						}
+					DIGGING = false;
 					}
 					break;
 				case NORTHEAST:
@@ -177,53 +181,69 @@ function Player() {
 						this.position.x += 1;
 						this.position.y -= 1;
 					} else {
-						console.log("Invalid move.  Perhaps you want to (D)ig??");
+						console.log("Invalid move.");
 					}
+					DIGGING = false;
 					break;
 				case EAST:
 					if(utils.moveIsValid(currentLevel, x+1, y)) {
 						this.position.x += 1;
 					} else {
-						console.log("Invalid move.  Perhaps you want to (D)ig??");
+						if(DIGGING&&(x+1)<59) {
+							currentLevel[x+1][y].isPassable = true;
+							console.log("You dig.");
+						}
 					}
+					DIGGING = false;
 					break;
 				case SOUTHEAST:
 					if(utils.moveIsValid(currentLevel, x+1, y+1)) {
 						this.position.x += 1;
 						this.position.y += 1;
 					} else {
-						console.log("Invalid move.  Perhaps you want to (D)ig??");
+						console.log("Invalid move.");
 					}
+					DIGGING = false;
 					break;
 				case SOUTH:
 					if(utils.moveIsValid(currentLevel, x, y+1)) {
 						this.position.y += 1;
 					} else {
-						console.log("Invalid move.  Perhaps you want to (D)ig??");
+						if(DIGGING&&(y+1)<29) {
+							currentLevel[x][y+1].isPassable = true;
+							console.log("You dig.");
+						}
 					}
+					DIGGING = false;
 					break;
 				case SOUTHWEST:
 					if(utils.moveIsValid(currentLevel, x-1, y+1)) {
 						this.position.y += 1;
 						this.position.x -= 1;
 					} else {
-						console.log("Invalid move.  Perhaps you want to (D)ig??");
+						console.log("Invalid move.");
 					}
+					DIGGING = false;
 					break;
 				case WEST:
 					if(utils.moveIsValid(currentLevel, x-1, y)) {
 						this.position.x -= 1;
 					} else {
-						console.log("Invalid move.  Perhaps you want to (D)ig??");
+						if(DIGGING&&(x-1)>0) {
+							currentLevel[x-1][y].isPassable = true;
+							console.log("You dig.");
+						}
 					}
+					DIGGING = false;
 					break;
 				case NORTHWEST:
 					if(utils.moveIsValid(currentLevel, x-1, y-1)) {
 						this.position.x -= 1;
 						this.position.y -= 1;
 					} else {
-						console.log("Invalid move.  Perhaps you want to (D)ig??");
+						console.log("Invalid move.");
 					}
+					DIGGING = false;
 					break;
 			};
 			

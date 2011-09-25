@@ -4,6 +4,7 @@ var GAME_IN_PROGRESS = false;
 
 var IN_TEXT_WINDOW = false;
 var IN_INVENTORY = false;
+var DIGGING = false;
 
 var invHighlightCursor = 0;
 var invCursor = 0;
@@ -139,7 +140,8 @@ function initGame() {
     			player.move(WAIT, currentLevel);
     			break;
     		case 68:
-    			console.log("You pressed 'd', for Dig!  Digging is not implemented yet.");
+    			//TODO: Add a check here for whether or not the player has a pickaxe (or shovel?) equipped
+    			DIGGING = true;
     			break;
     		case 73:
     			invHighlightCursor = 0;
