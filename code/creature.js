@@ -18,6 +18,15 @@ function CreatureProto() {
 			y: -1
 		},
 		
+		getEvasion: function() {
+			return 2;
+		},
+		
+		getDefenseStrength: function() {
+			//TODO: This should NOT be a hardcoded value
+			return 5;
+		},
+		
 		currentIndex: 0,
 		
 		material: materials[13],
@@ -109,6 +118,9 @@ function Player() {
 	return {
 		name: "Hardcoded Playername",
 		image: "./assets/images/sprites/creatures/player.png",
+		getEvasion: function() {
+			return 2;
+		},
 		limbs: {
 			body: {
 				maxHits: 10,
@@ -133,12 +145,14 @@ function Player() {
 			leftArm: {
 				maxHits: 4,
 				currentHits: 4,
-				baseWeight: 12
+				baseWeight: 12,
+				dexterity: 5
 			},
 			rightArm: {
 				maxHits: 4,
 				currentHits: 4,
-				baseWeight: 12
+				baseWeight: 12,
+				dexterity: 5
 			}
 		},
 		
@@ -173,8 +187,7 @@ function Player() {
 					break;
 				case NORTH:
 					if(utils.moveIsAttack(currentLevel, x, y-1)) {
-						console.log("Player is attacking!");
-						console.log("... or would be, if attacking were implemented.");
+						this.attack(utils.getCreatureAt(currentLevel, x, y-1));
 						DIGGING = false;
 						break;
 					}
@@ -190,8 +203,7 @@ function Player() {
 					break;
 				case NORTHEAST:
 					if(utils.moveIsAttack(currentLevel, x+1, y-1)) {
-						console.log("Player is attacking!");
-						console.log("... or would be, if attacking were implemented.");
+						this.attack(utils.getCreatureAt(currentLevel, x+1, y-1));
 						DIGGING = false;
 						break;
 					}
@@ -205,8 +217,7 @@ function Player() {
 					break;
 				case EAST:
 					if(utils.moveIsAttack(currentLevel, x+1, y)) {
-						console.log("Player is attacking!");
-						console.log("... or would be, if attacking were implemented.");
+						this.attack(utils.getCreatureAt(currentLevel, x+1, y));
 						DIGGING = false;
 						break;
 					}
@@ -222,8 +233,7 @@ function Player() {
 					break;
 				case SOUTHEAST:
 					if(utils.moveIsAttack(currentLevel, x+1, y+1)) {
-						console.log("Player is attacking!");
-						console.log("... or would be, if attacking were implemented.");
+						this.attack(utils.getCreatureAt(currentLevel, x+1, y+1));
 						DIGGING = false;
 						break;
 					}
@@ -237,8 +247,7 @@ function Player() {
 					break;
 				case SOUTH:
 					if(utils.moveIsAttack(currentLevel, x, y+1)) {
-						console.log("Player is attacking!");
-						console.log("... or would be, if attacking were implemented.");
+						this.attack(utils.getCreatureAt(currentLevel, x, y+1));
 						DIGGING = false;
 						break;
 					}
@@ -254,8 +263,7 @@ function Player() {
 					break;
 				case SOUTHWEST:
 					if(utils.moveIsAttack(currentLevel, x-1, y+1)) {
-						console.log("Player is attacking!");
-						console.log("... or would be, if attacking were implemented.");
+						this.attack(utils.getCreatureAt(currentLevel, x-1, y+1));
 						DIGGING = false;
 						break;
 					}
@@ -269,8 +277,7 @@ function Player() {
 					break;
 				case WEST:
 					if(utils.moveIsAttack(currentLevel, x-1, y)) {
-						console.log("Player is attacking!");
-						console.log("... or would be, if attacking were implemented.");
+						this.attack(utils.getCreatureAt(currentLevel, x-1, y));
 						DIGGING = false;
 						break;
 					}
@@ -286,8 +293,7 @@ function Player() {
 					break;
 				case NORTHWEST:
 					if(utils.moveIsAttack(currentLevel, x-1, y-1)) {
-						console.log("Player is attacking!");
-						console.log("... or would be, if attacking were implemented.");
+						this.attack(utils.getCreatureAt(currentLevel, x-1, y-1));
 						DIGGING = false;
 						break;
 					}
@@ -305,6 +311,36 @@ function Player() {
 				var itemBeingDropped = this.inventory[item];
 				this.inventory.splice(item, 1);
 				currentLevel[this.position.x][this.position.y].occupants.push(itemBeingDropped);
+			}
+			
+			this.attack = function(target) {
+				console.log("You attack the " + target.name + ".");
+				var baseDex = 0;
+				if(this.limbs.leftArm!=undefined) {
+					baseDex += this.limbs.leftArm.dexterity;
+				}
+				if(this.limbs.rightArm!=undefined) {
+					baseDex += this.limbs.rightArm.dexterity;
+				}
+				if(baseDex*Math.floor(Math.random()*3)<target.getEvasion()*Math.floor(Math.random()*3)) {
+					console.log("You miss.");
+					return;
+				} else {
+					attackStrength = this.getAttackStrength();
+					defenseStrength = target.getDefenseStrength();
+					if(attackStrength <= defenseStrength) {
+						console.log("You hit, but it doesn't seem to do much.");
+						return;
+					} else {
+						console.log("You hit for " + (attackStrength - defenseStrength) + " damage.");
+						//TODO: Actually process this damage
+					}
+				}
+			}
+			
+			this.getAttackStrength = function() {
+				//TODO: This should NOT be a hardcoded value
+				return 10;
 			}
 			
 			var x = this.position.x;

@@ -126,3 +126,11 @@ utils.getIndexOf = function(arr, item) {
 	}
 	return false;
 }
+
+utils.getCreatureAt = function(level, x, y) {
+	for(n in level[x][y].occupants) {
+		if(level[x][y].occupants[n].limbs != undefined) {
+			return level[x][y].occupants[n];
+		}
+	}
+}
