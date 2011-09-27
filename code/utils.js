@@ -21,6 +21,15 @@ utils.moveIsValid = function(level, x, y) {
 	}
 };
 
+utils.moveIsAttack = function(level, x, y) {
+	for(n in level[x][y].occupants) {
+		if(level[x][y].occupants[n].limbs!=undefined) {
+			return true;
+		}
+	}
+	return false;
+};
+
 utils.getTileOccupants = function(level, x, y) {
 	var occupantsString = '';
 	if(level[x][y].isPassable==false) {

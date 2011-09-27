@@ -87,6 +87,12 @@ function CreatureProto() {
 					}
 			}
 			
+			if(utils.moveIsAttack(currentLevel, x+this.shiftX, y+this.shiftY)) {
+				console.log("Creature is attacking!");
+				console.log("... or would be, if attacking were implemented.");
+				return;
+			}
+			
 			if(utils.moveIsValid(currentLevel, x+this.shiftX, y+this.shiftY)) {
 				level[x][y].occupants.pop();
 				level[x+this.shiftX][y+this.shiftY].occupants.push(this);
@@ -166,6 +172,12 @@ function Player() {
 				case WAIT:
 					break;
 				case NORTH:
+					if(utils.moveIsAttack(currentLevel, x, y-1)) {
+						console.log("Player is attacking!");
+						console.log("... or would be, if attacking were implemented.");
+						DIGGING = false;
+						break;
+					}
 					if(utils.moveIsValid(currentLevel, x, y-1)) {
 						this.position.y -= 1;
 					} else {
@@ -177,6 +189,12 @@ function Player() {
 					}
 					break;
 				case NORTHEAST:
+					if(utils.moveIsAttack(currentLevel, x+1, y-1)) {
+						console.log("Player is attacking!");
+						console.log("... or would be, if attacking were implemented.");
+						DIGGING = false;
+						break;
+					}
 					if(utils.moveIsValid(currentLevel, x+1, y-1)) {
 						this.position.x += 1;
 						this.position.y -= 1;
@@ -186,6 +204,12 @@ function Player() {
 					DIGGING = false;
 					break;
 				case EAST:
+					if(utils.moveIsAttack(currentLevel, x+1, y)) {
+						console.log("Player is attacking!");
+						console.log("... or would be, if attacking were implemented.");
+						DIGGING = false;
+						break;
+					}
 					if(utils.moveIsValid(currentLevel, x+1, y)) {
 						this.position.x += 1;
 					} else {
@@ -197,6 +221,12 @@ function Player() {
 					DIGGING = false;
 					break;
 				case SOUTHEAST:
+					if(utils.moveIsAttack(currentLevel, x+1, y+1)) {
+						console.log("Player is attacking!");
+						console.log("... or would be, if attacking were implemented.");
+						DIGGING = false;
+						break;
+					}
 					if(utils.moveIsValid(currentLevel, x+1, y+1)) {
 						this.position.x += 1;
 						this.position.y += 1;
@@ -206,6 +236,12 @@ function Player() {
 					DIGGING = false;
 					break;
 				case SOUTH:
+					if(utils.moveIsAttack(currentLevel, x, y+1)) {
+						console.log("Player is attacking!");
+						console.log("... or would be, if attacking were implemented.");
+						DIGGING = false;
+						break;
+					}
 					if(utils.moveIsValid(currentLevel, x, y+1)) {
 						this.position.y += 1;
 					} else {
@@ -217,6 +253,12 @@ function Player() {
 					DIGGING = false;
 					break;
 				case SOUTHWEST:
+					if(utils.moveIsAttack(currentLevel, x-1, y+1)) {
+						console.log("Player is attacking!");
+						console.log("... or would be, if attacking were implemented.");
+						DIGGING = false;
+						break;
+					}
 					if(utils.moveIsValid(currentLevel, x-1, y+1)) {
 						this.position.y += 1;
 						this.position.x -= 1;
@@ -226,6 +268,12 @@ function Player() {
 					DIGGING = false;
 					break;
 				case WEST:
+					if(utils.moveIsAttack(currentLevel, x-1, y)) {
+						console.log("Player is attacking!");
+						console.log("... or would be, if attacking were implemented.");
+						DIGGING = false;
+						break;
+					}
 					if(utils.moveIsValid(currentLevel, x-1, y)) {
 						this.position.x -= 1;
 					} else {
@@ -237,6 +285,12 @@ function Player() {
 					DIGGING = false;
 					break;
 				case NORTHWEST:
+					if(utils.moveIsAttack(currentLevel, x-1, y-1)) {
+						console.log("Player is attacking!");
+						console.log("... or would be, if attacking were implemented.");
+						DIGGING = false;
+						break;
+					}
 					if(utils.moveIsValid(currentLevel, x-1, y-1)) {
 						this.position.x -= 1;
 						this.position.y -= 1;
