@@ -97,8 +97,7 @@ function CreatureProto() {
 			}
 			
 			if(utils.moveIsAttack(currentLevel, x+this.shiftX, y+this.shiftY)) {
-				console.log("Creature is attacking!");
-				console.log("... or would be, if attacking were implemented.");
+				this.attack(utils.getCreatureAt(currentLevel, x+this.shiftX, y+this.shiftY));
 				return;
 			}
 			
@@ -110,6 +109,36 @@ function CreatureProto() {
 			}
 			
 			this.behaviorCounter--;
+		},
+		
+		attack: function(target) {
+			console.log("The primordial creatures attacks you.");
+			var baseDex = 0;
+			if(this.limbs.leftArm!=undefined) {
+				baseDex += this.limbs.leftArm.dexterity;
+			}
+			if(this.limbs.rightArm!=undefined) {
+				baseDex += this.limbs.rightArm.dexterity;
+			}
+			if(baseDex*Math.floor(Math.random()*3)<target.getEvasion()*Math.floor(Math.random()*3)) {
+				console.log("It misses.");
+				return;
+			} else {
+				attackStrength = this.getAttackStrength();
+				defenseStrength = target.getDefenseStrength();
+				if(attackStrength <= defenseStrength) {
+					console.log("It hits, but it glances off of you.");
+					return;
+				} else {
+					console.log("It hits you for " + (attackStrength - defenseStrength) + " damage.");
+					//TODO: Actually process this damage
+				}
+			}
+		},
+	
+		getAttackStrength: function() {
+			//TODO: This should NOT be a hardcoded value
+			return 10;
 		}
 	}
 }
@@ -338,15 +367,20 @@ function Player() {
 				}
 			}
 			
-			this.getAttackStrength = function() {
-				//TODO: This should NOT be a hardcoded value
-				return 10;
-			}
-			
 			var x = this.position.x;
 			var y = this.position.y;
 			level[x][y].occupants.push(this);
 			console.log(this.article + ' ' + this.name + ' is now located at ' + this.position.x + ', ' + this.position.y + '.');
+		},
+		
+		getDefenseStrength: function() {
+			//TODO: This should NOT be a hardcoded value
+			return 5;
+		},
+		
+		getAttackStrength: function() {
+			//TODO: This should NOT be a hardcoded value
+			return 10;
 		}
 		
 	}
